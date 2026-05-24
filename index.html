@@ -1,0 +1,1914 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-mode="viewer">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dark – Character Guide</title>
+  <style>
+    :root {
+      --bg: #111110;
+      --surface: #191817;
+      --surface-2: #201f1d;
+      --surface-3: #2a2926;
+      --border: rgba(255,255,255,.08);
+      --border-strong: rgba(255,255,255,.16);
+      --text: #e8e3da;
+      --muted: #a09890;
+      --faint: #6a6460;
+      --accent: #5ba3af;
+      --accent-soft: #2d7d87;
+      --gold: #c9a84c;
+      --danger: #c06090;
+      --family-kahnwald: #5ba3af;
+      --family-nielsen: #c9a84c;
+      --family-doppler: #8b7cc8;
+      --family-tiedemann: #b07060;
+      --family-other: #7a9070;
+      --radius: 18px;
+      --radius-sm: 12px;
+      --radius-xs: 8px;
+      --shadow-sm: 0 8px 24px rgba(0,0,0,.32);
+      --shadow-lg: 0 18px 60px rgba(0,0,0,.55);
+      --font: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      --transition: 0.2s cubic-bezier(.16,1,.3,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; text-size-adjust: none; scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #1b1a18 0, #111110 45%, #080807 100%);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.55;
+    }
+    img { display: block; max-width: 100%; height: auto; }
+    button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+    input, select, textarea { font: inherit; color: inherit; }
+    p { max-width: 70ch; }
+
+    .hidden { display: none !important; }
+    .muted { color: var(--muted); }
+
+    .app {
+      max-width: 1560px;
+      margin: 0 auto;
+      padding: clamp(1rem, 3vw, 2rem);
+    }
+
+    .app-header {
+      position: sticky;
+      top: 0.75rem;
+      z-index: 10;
+      background: rgba(17,17,16,.9);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.1);
+      padding: 1.1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-sm);
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    body[data-edit-mode="on"] .app-header {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 2px rgba(201,168,76,.38);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      user-select: none;
+    }
+    .logo-mark {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #5ba3af, #111110);
+      border: 1px solid rgba(255,255,255,.22);
+      display: grid; place-items: center;
+      box-shadow: 0 0 0 1px rgba(0,0,0,.6), 0 16px 40px rgba(0,0,0,.6);
+    }
+    .logo-mark span { font-weight: 700; font-size: .9rem; letter-spacing: .08em; text-transform: uppercase; }
+    .logo-text line-height: 1.1;
+    .logo-text strong { font-size: 1.1rem; letter-spacing: .04em; }
+    .logo-text span { display: block; font-size: .78rem; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; }
+
+    .header-right { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .55rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-strong);
+      background: rgba(255,255,255,.02);
+      font-size: .86rem;
+      white-space: nowrap;
+      transition: var(--transition);
+      min-height: 36px;
+    }
+    .btn:hover { background: rgba(255,255,255,.06); transform: translateY(-1px); }
+    .btn.primary { background: linear-gradient(135deg, var(--accent-soft), var(--accent)); border-color: transparent; color: #fff; }
+    .btn.primary:hover { filter: brightness(1.05); }
+    .btn.ghost { background: transparent; border-color: var(--border); }
+    .btn.sm { padding: .45rem .8rem; font-size: .8rem; min-height: 32px; }
+    .btn.danger { background: rgba(192,96,144,.12); color: var(--danger); }
+
+    .episode-pill {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .45rem .9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.4);
+      font-size: .8rem;
+    }
+    .episode-pill strong { color: var(--gold); letter-spacing: .08em; }
+
+    .main {
+      margin-top: 1.5rem;
+    }
+
+    .edit-banner {
+      display: none;
+      margin-bottom: 1rem;
+      padding: .8rem 1rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.6);
+      font-size: .85rem;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+      flex-wrap: wrap;
+    }
+    body[data-edit-mode="on"] .edit-banner { display: flex; }
+
+    .tabs {
+      display: flex;
+      gap: .5rem;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      margin-bottom: 1rem;
+      padding-bottom: .35rem;
+    }
+    .tab-btn {
+      padding: .45rem .9rem;
+      border-radius: var(--radius-xs) var(--radius-xs) 0 0;
+      border: 1px solid transparent;
+      font-size: .86rem;
+      color: var(--muted);
+      transition: var(--transition);
+    }
+    .tab-btn.active {
+      border-color: rgba(255,255,255,.24);
+      border-bottom-color: #111110;
+      background: #111110;
+      color: var(--text);
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      margin-bottom: 1rem;
+      align-items: center;
+    }
+    .filter-bar .input-wrap {
+      position: relative;
+      flex: 1;
+      min-width: 180px;
+      max-width: 340px;
+    }
+    .filter-bar input,
+    .filter-bar select {
+      width: 100%;
+      padding: .7rem .9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.2);
+      background: rgba(0,0,0,.5);
+      font-size: .9rem;
+      outline: none;
+      transition: var(--transition);
+    }
+    .filter-bar input:focus,
+    .filter-bar select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(91,163,175,.16);
+    }
+
+    .cards-layout {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 1.25rem;
+      align-items: flex-start;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
+      gap: .9rem;
+    }
+
+    .char-card {
+      background: rgba(0,0,0,.5);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.08);
+      padding: 1.1rem;
+      display: grid;
+      gap: .8rem;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .char-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(91,163,175,.16), transparent 52%);
+      opacity: 0;
+      transition: opacity var(--transition);
+      pointer-events: none;
+    }
+    .char-card:hover::before { opacity: .7; }
+    .char-card.selected {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(91,163,175,.3);
+    }
+
+    .card-top {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: .75rem;
+      align-items: center;
+    }
+    .avatar {
+      width: 52px; height: 52px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: radial-gradient(circle at 20% 20%, var(--surface-3), var(--surface));
+      display: grid; place-items: center;
+      font-weight: 700; font-size: 1rem;
+      color: var(--muted);
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+    .char-name { font-weight: 600; font-size: 1rem; margin-bottom: .2rem; }
+    .char-meta {
+      display: flex; flex-wrap: wrap; gap: .35rem; align-items: center;
+      font-size: .8rem; color: var(--muted);
+    }
+    .ftag {
+      display: inline-flex; align-items: center; gap: .3rem;
+      padding: .2rem .55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.5);
+    }
+    .fdot {
+      width: .5rem; height: .5rem;
+      border-radius: 50%; flex-shrink: 0;
+    }
+    .fdot.Kahnwald { background: var(--family-kahnwald); }
+    .fdot.Nielsen { background: var(--family-nielsen); }
+    .fdot.Doppler { background: var(--family-doppler); }
+    .fdot.Tiedemann { background: var(--family-tiedemann); }
+    .fdot.Other { background: var(--family-other); }
+
+    .versions-mini {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem;
+      font-size: .78rem;
+    }
+    .version-pill {
+      padding: .16rem .5rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.4);
+      color: var(--muted);
+    }
+
+    .detail-panel {
+      position: sticky;
+      top: 5.4rem;
+      max-height: calc(100vh - 6rem);
+      overflow-y: auto;
+      background: rgba(0,0,0,.6);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      padding: 1.2rem 1.1rem 1.4rem;
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      gap: 1rem;
+    }
+    .detail-empty {
+      min-height: 220px;
+      display: grid; place-items: center;
+      color: var(--muted);
+      font-size: .9rem;
+      text-align: center;
+      gap: .5rem;
+    }
+
+    .detail-hero {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: .9rem;
+      align-items: center;
+      margin-bottom: .5rem;
+    }
+    .detail-avatar {
+      width: 80px; height: 80px;
+      border-radius: 22px;
+      overflow: hidden;
+      background: radial-gradient(circle at 20% 20%, var(--surface-3), var(--surface));
+      display: grid; place-items: center;
+      font-weight: 700; font-size: 1.3rem;
+      color: var(--muted);
+    }
+    .detail-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .detail-name { font-size: 1.3rem; font-weight: 700; margin-bottom: .2rem; }
+    .detail-family { font-size: .86rem; color: var(--muted); }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .7rem;
+    }
+    .info-box {
+      padding: .7rem;
+      border-radius: var(--radius-xs);
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.5);
+    }
+    .info-box .label {
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--faint);
+      margin-bottom: .25rem;
+    }
+    .info-box .value { font-size: .9rem; }
+
+    .related {
+      margin-bottom: .75rem;
+    }
+    .related h4 {
+      font-size: .74rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--faint);
+      margin-bottom: .4rem;
+    }
+    .rel-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem;
+    }
+    .rel-chip {
+      display: inline-flex; align-items: center;
+      gap: .3rem;
+      padding: .3rem .6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.5);
+      font-size: .8rem;
+    }
+
+    .versions {
+      border-top: 1px solid rgba(255,255,255,.12);
+      padding-top: .8rem;
+    }
+    .versions h4 {
+      font-size: .8rem;
+      margin-bottom: .5rem;
+    }
+    .version-list {
+      display: grid;
+      gap: .65rem;
+    }
+    .version-card {
+      display: grid;
+      grid-template-columns: 70px 1fr;
+      gap: .75rem;
+      align-items: center;
+    }
+    .vphoto {
+      width: 70px; height: 70px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: radial-gradient(circle at 20% 20%, var(--surface-3), var(--surface));
+      display: grid; place-items: center;
+      font-weight: 700; font-size: 1rem;
+      color: var(--muted);
+    }
+    .vphoto img { width: 100%; height: 100%; object-fit: cover; }
+    .vmeta .time { font-size: .86rem; font-weight: 600; }
+
+    #tab-map.hidden, #tab-characters.hidden { display: none; }
+
+    .map-wrapper {
+      margin-top: .9rem;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.16);
+      background: radial-gradient(circle at top,#1c1b19,#0b0b0a);
+      padding: .9rem .9rem 1rem;
+    }
+    .map-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      align-items: center;
+      margin-bottom: .6rem;
+    }
+    .map-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      align-items: center;
+      font-size: .78rem;
+      color: var(--muted);
+    }
+    .map-legend-item { display: inline-flex; align-items: center; gap: .35rem; }
+    .map-legend-dot {
+      width: .55rem; height: .55rem;
+      border-radius: 50%;
+    }
+
+    #mapCanvas {
+      width: 100%;
+      height: 460px;
+      border-radius: calc(var(--radius) - 4px);
+      border: 1px solid rgba(255,255,255,.18);
+      display: block;
+      background: radial-gradient(circle at top,#1c1b19,#070707);
+      touch-action: none;
+    }
+
+    .image-clickable { cursor: zoom-in; }
+    .image-modal-bg {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.84);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 50;
+      backdrop-filter: blur(6px);
+    }
+    .image-modal-bg.open { display: flex; }
+    .image-modal {
+      width: min(960px, 100%);
+      max-height: 92vh;
+      display: grid;
+      gap: .8rem;
+      justify-items: center;
+    }
+    .image-modal-stage img {
+      max-width: min(100%, 860px);
+      max-height: 76vh;
+      border-radius: 22px;
+      box-shadow: var(--shadow-lg);
+    }
+    .image-modal-note {
+      font-size: .8rem;
+      color: var(--muted);
+    }
+
+    /* Editor panel */
+    #editorPanel {
+      display: none;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      padding: 1rem 1.1rem;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.75);
+      display: grid;
+      gap: .9rem;
+    }
+    body[data-edit-mode="off"] #editorPanel { display: none; }
+    body[data-edit-mode="on"] #editorPanel { display: grid; }
+
+    .editor-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1.1fr;
+      gap: 1rem;
+    }
+    .field {
+      display: grid;
+      gap: .35rem;
+    }
+    .field label {
+      font-size: .8rem;
+      color: var(--muted);
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      padding: .6rem .7rem;
+      border-radius: var(--radius-xs);
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(0,0,0,.6);
+      outline: none;
+      font-size: .86rem;
+      min-height: 36px;
+    }
+    .field textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(91,163,175,.2);
+    }
+
+    .versions-edit {
+      border-top: 1px solid rgba(255,255,255,.16);
+      padding-top: .75rem;
+    }
+    .ve-block {
+      padding: .7rem;
+      border-radius: var(--radius-xs);
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(0,0,0,.6);
+      display: grid;
+      gap: .45rem;
+      margin-bottom: .55rem;
+    }
+    .ve-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .5rem;
+    }
+    .ve-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: .5rem;
+    }
+    .editor-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+
+    @media (max-width: 1100px) {
+      .cards-layout {
+        grid-template-columns: 1fr;
+      }
+      .detail-panel {
+        position: static;
+        max-height: none;
+        margin-top: .8rem;
+      }
+      .editor-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 700px) {
+      #mapCanvas { height: 520px; }
+    }
+  </style>
+</head>
+<body data-edit-mode="off">
+<div class="app">
+  <header class="app-header">
+    <div class="logo" id="appLogo">
+      <div class="logo-mark"><span>DK</span></div>
+      <div class="logo-text">
+        <strong>Dark</strong>
+        <span>Character guide</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="episode-pill">
+        <span>Episode</span>
+        <strong id="episodeLabelH">S1·E4</strong>
+      </span>
+      <button class="btn ghost" type="button" id="themeBtn">Theme</button>
+      <button class="btn sm ghost" type="button" id="viewToggle">View: Alphabetical</button>
+      <button class="btn sm primary" type="button" id="editToggleBtn">Edit</button>
+    </div>
+  </header>
+
+  <div class="edit-banner">
+    <div>
+      <strong>Editor mode</strong>
+      <span class="muted">Change episode cap and characters, then export JSON if you want to persist changes.</span>
+    </div>
+    <button class="btn sm ghost" type="button" id="exportBtn">Export JSON</button>
+  </div>
+
+  <!-- Editor panel -->
+  <section id="editorPanel">
+    <div class="editor-grid">
+      <div>
+        <div class="field">
+          <label for="episodeRange">Episode cap (only data at or below this episode is visible)</label>
+          <input type="range" id="episodeRange" min="1" max="10" value="4" />
+          <div class="muted">
+            <strong id="episodeLabelBig">S1·E4</strong>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="charSelect">Character to edit</label>
+          <select id="charSelect">
+            <option value="">— New character —</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <div class="field">
+          <label for="fName">Name</label>
+          <input id="fName" type="text" placeholder="Full name" />
+        </div>
+        <div class="field">
+          <label for="fFamily">Family</label>
+          <select id="fFamily">
+            <option value="Kahnwald">Kahnwald</option>
+            <option value="Nielsen">Nielsen</option>
+            <option value="Doppler">Doppler</option>
+            <option value="Tiedemann">Tiedemann</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="fOcc">Occupation / role</label>
+          <input id="fOcc" type="text" placeholder="Student, police officer, etc." />
+        </div>
+        <div class="field">
+          <label for="fReveal">First seen (episode number)</label>
+          <input id="fReveal" type="number" min="1" max="10" value="1" />
+        </div>
+      </div>
+    </div>
+
+    <div class="editor-grid">
+      <div>
+        <div class="field">
+          <label for="fSpouse">Spouse / partner (comma separated)</label>
+          <input id="fSpouse" type="text" />
+        </div>
+        <div class="field">
+          <label for="fParents">Parents (comma separated)</label>
+          <input id="fParents" type="text" />
+        </div>
+        <div class="field">
+          <label for="fChildren">Children (comma separated)</label>
+          <input id="fChildren" type="text" />
+        </div>
+        <div class="field">
+          <label for="fSiblings">Siblings (comma separated)</label>
+          <input id="fSiblings" type="text" />
+        </div>
+      </div>
+      <div class="versions-edit">
+        <div class="ve-actions">
+          <strong style="font-size:.9rem;">Time versions</strong>
+          <button class="btn sm ghost" type="button" id="addVersionBtn">Add version</button>
+        </div>
+        <div id="versionListEdit"></div>
+      </div>
+    </div>
+
+    <div class="editor-actions">
+      <button class="btn primary" type="button" id="saveCharBtn">Save character</button>
+      <button class="btn danger hidden" type="button" id="deleteCharBtn">Delete character</button>
+    </div>
+  </section>
+
+  <main class="main">
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="characters" type="button">Characters</button>
+      <button class="tab-btn" data-tab="map" type="button">Family map</button>
+    </div>
+
+    <section id="tab-characters">
+      <div class="filter-bar">
+        <div class="input-wrap">
+          <input id="searchInput" type="search" placeholder="Search name, family, role" />
+        </div>
+        <select id="familyFilter">
+          <option value="All">All families</option>
+          <option value="Kahnwald">Kahnwald</option>
+          <option value="Nielsen">Nielsen</option>
+          <option value="Doppler">Doppler</option>
+          <option value="Tiedemann">Tiedemann</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="cards-layout">
+        <div id="cardsGrid"></div>
+        <aside class="detail-panel" id="detailPanel">
+          <div class="detail-empty">
+            <p>Select a character to see details.</p>
+            <p class="muted">Use the Family map to click a node, or pick a card on the left.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="tab-map" class="hidden">
+      <div class="map-wrapper">
+        <div class="map-toolbar">
+          <button class="btn sm" id="mapZoomIn" type="button">＋ Zoom in</button>
+          <button class="btn sm" id="mapZoomOut" type="button">－ Zoom out</button>
+          <button class="btn sm" id="mapReset" type="button">Reset view</button>
+          <div class="map-legend">
+            <span>Families:</span>
+            <span class="map-legend-item"><span class="map-legend-dot" style="background:var(--family-kahnwald)"></span>Kahnwald</span>
+            <span class="map-legend-item"><span class="map-legend-dot" style="background:var(--family-nielsen)"></span>Nielsen</span>
+            <span class="map-legend-item"><span class="map-legend-dot" style="background:var(--family-doppler)"></span>Doppler</span>
+            <span class="map-legend-item"><span class="map-legend-dot" style="background:var(--family-tiedemann)"></span>Tiedemann</span>
+            <span class="map-legend-item"><span class="map-legend-dot" style="background:var(--family-other)"></span>Other</span>
+          </div>
+        </div>
+        <canvas id="mapCanvas"></canvas>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- Image modal -->
+<div class="image-modal-bg" id="imageModal">
+  <div class="image-modal" role="dialog" aria-modal="true">
+    <div class="image-modal-stage">
+      <img id="imageModalImg" alt="Character image" />
+    </div>
+    <p class="image-modal-note">Tap anywhere to close.</p>
+  </div>
+</div>
+
+<script>
+/*
+  DATA SECTION
+  ============
+  - currentEpisode: episode cap (only characters/versions with revealEpisode <= cap are visible).
+  - characters: full list, each with revealEpisode and per-version revealEpisode.
+
+  You can replace the characters array with your full data later.
+*/
+const SEED = {
+  currentEpisode: 4,
+  characters: [
+    {
+      id: 'jonas',
+      name: 'Jonas Kahnwald',
+      family: 'Kahnwald',
+      occupation: 'Student',
+      revealEpisode: 1,
+      relations: {
+        spouse: [],
+        parents: ['Hannah Kahnwald', 'Michael Kahnwald'],
+        children: [],
+        siblings: []
+      },
+      versions: [
+        { label: '2019', image: '', revealEpisode: 1 }
+      ]
+    },
+    {
+      id: 'hannah',
+      name: 'Hannah Kahnwald',
+      family: 'Kahnwald',
+      occupation: '',
+      revealEpisode: 1,
+      relations: {
+        spouse: ['Michael Kahnwald'],
+        parents: [],
+        children: ['Jonas Kahnwald'],
+        siblings: []
+      },
+      versions: [
+        { label: '2019', image: '', revealEpisode: 1 }
+      ]
+    },
+    {
+      id: 'michael',
+      name: 'Michael Kahnwald',
+      family: 'Kahnwald',
+      occupation: 'Artist',
+      revealEpisode: 1,
+      relations: {
+        spouse: ['Hannah Kahnwald'],
+        parents: [],
+        children: ['Jonas Kahnwald'],
+        siblings: []
+      },
+      versions: [
+        { label: '2019', image: '', revealEpisode: 1 }
+      ]
+    },
+    {
+      id: 'ulrich',
+      name: 'Ulrich Nielsen',
+      family: 'Nielsen',
+      occupation: 'Police officer',
+      revealEpisode: 1,
+      relations: {
+        spouse: ['Katharina Nielsen'],
+        parents: [],
+        children: ['Magnus Nielsen','Martha Nielsen','Mikkel Nielsen'],
+        siblings: ['Mads Nielsen']
+      },
+      versions: [
+        { label: '2019', image: '', revealEpisode: 1 },
+        { label: '1986', image: '', revealEpisode: 3 }
+      ]
+    },
+    {
+      id: 'katharina',
+      name: 'Katharina Nielsen',
+      family: 'Nielsen',
+      occupation: 'School principal',
+      revealEpisode: 1,
+      relations: {
+        spouse: ['Ulrich Nielsen'],
+        parents: [],
+        children: ['Magnus Nielsen','Martha Nielsen','Mikkel Nielsen'],
+        siblings: []
+      },
+      versions: [
+        { label: '2019', image: '', revealEpisode: 1 },
+        { label: '1986', image: '', revealEpisode: 3 }
+      ]
+    },
+    {
+      id: 'magnus',
+      name: 'Magnus Nielsen',
+      family: 'Nielsen',
+      occupation: 'Student',
+      revealEpisode: 1,
+      relations: {
+        spouse: [],
+        parents: ['Ulrich Nielsen','Katharina Nielsen'],
+        children: [],
+        siblings: ['Martha Nielsen','Mikkel Nielsen']
+      },
+      versions: [
+        { label: '2019', image: '', revealEpisode: 1 }
+      ]
+    },
+    {
+      id: 'martha',
+      name: 'Martha Nielsen',
+      family: 'Nielsen',
+      occupation: 'Student',
+      revealEpisode: 1,
+      relations: {
+        spouse: [],
+        parents: ['Ulrich Nielsen','Katharina Nielsen'],
+        children: [],
+        siblings: ['Magnus Nielsen','Mikkel Nielsen']
+      },
+      versions: [
+        { label: '2019', image: '', revealEpisode: 1 }
+      ]
+    },
+    {
+      id: 'mikkel',
+      name: 'Mikkel Nielsen',
+      family: 'Nielsen',
+      occupation: 'Student',
+      revealEpisode: 1,
+      relations: {
+        spouse: [],
+        parents: ['Ulrich Nielsen','Katharina Nielsen'],
+        children: [],
+        siblings: ['Magnus Nielsen','Martha Nielsen']
+      },
+      versions: [
+        { label: '2019', image: '', revealEpisode: 1 }
+      ]
+    },
+    {
+      id: 'charlotte',
+      name: 'Charlotte Doppler',
+      family: 'Doppler',
+      occupation: 'Police chief',
+      revealEpisode: 1,
+      relations: {
+        spouse: ['Peter Doppler'],
+        parents: [],
+        children: ['Franziska Doppler','Elisabeth Doppler'],
+        siblings: []
+      },
+      versions: [
+        { label: '2019', image: '', revealEpisode: 1 }
+      ]
+    },
+    {
+      id: 'peter',
+      name: 'Peter Doppler',
+      family: 'Doppler',
+      occupation: 'Therapist',
+      revealEpisode: 1,
+      relations: {
+        spouse: ['Charlotte Doppler'],
+        parents: ['Helge Doppler'],
+        children: ['Franziska Doppler','Elisabeth Doppler'],
+        siblings: []
+      },
+      versions: [
+        { label: '2019', image: '', revealEpisode: 1 }
+      ]
+    },
+    {
+      id: 'franziska',
+      name: 'Franziska Doppler',
+      family: 'Doppler',
+      occupation: 'Student',
+      revealEpisode: 1,
+      relations: {
+        spouse: [],
+        parents: ['Charlotte Doppler','Peter Doppler'],
+        children: [],
+        siblings: ['Elisabeth Doppler']
+      },
+      versions: [
+        { label: '2019', image: '', revealEpisode: 1 }
+      ]
+    },
+    {
+      id: 'elisabeth',
+      name: 'Elisabeth Doppler',
+      family: 'Doppler',
+      occupation: 'Student',
+      revealEpisode: 1,
+      relations: {
+        spouse: [],
+        parents: ['Charlotte Doppler','Peter Doppler'],
+        children: [],
+        siblings: ['Franziska Doppler']
+      },
+      versions: [
+        { label: '2019', image: '', revealEpisode: 1 }
+      ]
+    },
+    {
+      id: 'regina',
+      name: 'Regina Tiedemann',
+      family: 'Tiedemann',
+      occupation: 'Hotel owner',
+      revealEpisode: 1,
+      relations: {
+        spouse: [],
+        parents: ['Claudia Tiedemann'],
+        children: ['Bartosz Tiedemann'],
+        siblings: []
+      },
+      versions: [
+        { label: '2019', image: '', revealEpisode: 1 },
+        { label: '1986', image: '', revealEpisode: 3 }
+      ]
+    },
+    {
+      id: 'bartosz',
+      name: 'Bartosz Tiedemann',
+      family: 'Tiedemann',
+      occupation: 'Student',
+      revealEpisode: 1,
+      relations: {
+        spouse: [],
+        parents: ['Regina Tiedemann'],
+        children: [],
+        siblings: []
+      },
+      versions: [
+        { label: '2019', image: '', revealEpisode: 1 }
+      ]
+    },
+    {
+      id: 'claudia',
+      name: 'Claudia Tiedemann',
+      family: 'Tiedemann',
+      occupation: 'Nuclear plant director',
+      revealEpisode: 3,
+      relations: {
+        spouse: [],
+        parents: ['Egon Tiedemann'],
+        children: ['Regina Tiedemann'],
+        siblings: []
+      },
+      versions: [
+        { label: '1986', image: '', revealEpisode: 3 }
+      ]
+    },
+    {
+      id: 'egon',
+      name: 'Egon Tiedemann',
+      family: 'Tiedemann',
+      occupation: 'Police officer',
+      revealEpisode: 3,
+      relations: {
+        spouse: [],
+        parents: [],
+        children: ['Claudia Tiedemann'],
+        siblings: []
+      },
+      versions: [
+        { label: '1986', image: '', revealEpisode: 3 }
+      ]
+    },
+    {
+      id: 'noah',
+      name: 'Noah',
+      family: 'Other',
+      occupation: 'Priest',
+      revealEpisode: 1,
+      relations: {
+        spouse: [],
+        parents: [],
+        children: [],
+        siblings: []
+      },
+      versions: [
+        { label: '2019', image: '', revealEpisode: 1 }
+      ]
+    },
+    {
+      id: 'stranger',
+      name: 'The Stranger',
+      family: 'Other',
+      occupation: '',
+      revealEpisode: 2,
+      relations: {
+        spouse: [],
+        parents: [],
+        children: [],
+        siblings: []
+      },
+      versions: [
+        { label: '2019', image: '', revealEpisode: 2 }
+      ]
+    }
+  ]
+};
+
+// ===== APP STATE =====
+let S = JSON.parse(JSON.stringify(SEED));
+let selectedId = null;
+let activeTab = 'characters';
+let characterViewMode = 'alphabetical'; // or 'family'
+let editMode = 'off';
+let mapTransform = { x: 0, y: 0, scale: 1 };
+let isDragging = false;
+let dragStart = { x: 0, y: 0 };
+let nodePositions = {};
+
+const root = document.documentElement;
+
+// ===== UTIL =====
+function esc(s) {
+  return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function initials(name) {
+  return name.split(' ').filter(Boolean).slice(0,2).map(w => w[0]).join('').toUpperCase();
+}
+function visibleChars() {
+  return S.characters.filter(c => c.revealEpisode <= S.currentEpisode);
+}
+function visibleVersions(c) {
+  return (c.versions || []).filter(v => v.revealEpisode <= S.currentEpisode);
+}
+function familyColor(f) {
+  const styles = getComputedStyle(root);
+  const map = {
+    Kahnwald: styles.getPropertyValue('--family-kahnwald').trim(),
+    Nielsen: styles.getPropertyValue('--family-nielsen').trim(),
+    Doppler: styles.getPropertyValue('--family-doppler').trim(),
+    Tiedemann: styles.getPropertyValue('--family-tiedemann').trim(),
+    Other: styles.getPropertyValue('--family-other').trim()
+  };
+  return map[f] || map.Other;
+}
+function splitCSV(str) {
+  return String(str || '')
+    .split(',')
+    .map(v => v.trim())
+    .filter(Boolean);
+}
+function mergeAndSortByName(list) {
+  return [...list].sort((a,b) => a.name.localeCompare(b.name));
+}
+
+// ===== RENDER: CARDS & DETAIL =====
+function renderCardHTML(c) {
+  const vv = visibleVersions(c);
+  const lead = vv[0] || {};
+  const selected = c.id === selectedId;
+  return `
+    <article class="char-card${selected ? ' selected' : ''}" data-id="${esc(c.id)}">
+      <div class="card-top">
+        <div class="avatar${lead.image ? ' image-clickable' : ''}"${lead.image ? ` data-image="${esc(lead.image)}"` : ''}>
+          ${lead.image ? `<img src="${esc(lead.image)}" alt="${esc(c.name)}" loading="lazy">` : initials(c.name)}
+        </div>
+        <div>
+          <div class="char-name">${esc(c.name)}</div>
+          <div class="char-meta">
+            <span class="ftag"><span class="fdot ${esc(c.family)}"></span>${esc(c.family)}</span>
+            ${c.occupation ? `<span>${esc(c.occupation)}</span>` : ''}
+          </div>
+        </div>
+      </div>
+      <div class="versions-mini">
+        ${vv.map(v => `<span class="version-pill">${esc(v.label)}</span>`).join('')}
+      </div>
+    </article>
+  `;
+}
+
+function renderCards() {
+  const container = document.getElementById('cardsGrid');
+  const term = document.getElementById('searchInput').value.trim().toLowerCase();
+  const family = document.getElementById('familyFilter').value;
+  let list = visibleChars();
+
+  if (family !== 'All') list = list.filter(c => c.family === family);
+  if (term) {
+    list = list.filter(c =>
+      [c.name, c.family, c.occupation].join(' ').toLowerCase().includes(term)
+    );
+  }
+
+  if (!list.length) {
+    container.innerHTML = '<div style="padding:1.2rem;color:var(--muted);">No characters match this filter yet.</div>';
+    return;
+  }
+
+  let html = '';
+
+  if (characterViewMode === 'alphabetical') {
+    list = mergeAndSortByName(list);
+    html = `<div class="cards-grid">${list.map(renderCardHTML).join('')}</div>`;
+  } else {
+    const famOrder = ['Kahnwald','Nielsen','Doppler','Tiedemann','Other'];
+    famOrder.forEach(fam => {
+      const group = list.filter(c => c.family === fam);
+      if (!group.length) return;
+      html += `
+        <h3 style="font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;color:var(--faint);margin:.6rem .1rem .3rem;">
+          ${fam}
+        </h3>
+        <div class="cards-grid">
+          ${mergeAndSortByName(group).map(renderCardHTML).join('')}
+        </div>
+      `;
+    });
+  }
+
+  container.innerHTML = html;
+}
+
+function renderDetail() {
+  const panel = document.getElementById('detailPanel');
+  const c = S.characters.find(x => x.id === selectedId && x.revealEpisode <= S.currentEpisode);
+  if (!c) {
+    panel.innerHTML = `
+      <div class="detail-empty">
+        <p>Select a character to see details.</p>
+        <p class="muted">Use the Family map to click a node, or pick a card on the left.</p>
+      </div>`;
+    return;
+  }
+  const vv = visibleVersions(c);
+  const lead = vv[0] || {};
+  const rel = c.relations || { spouse: [], parents: [], children: [], siblings: [] };
+
+  panel.innerHTML = `
+    <div class="detail-hero">
+      <div class="detail-avatar${lead.image ? ' image-clickable' : ''}"${lead.image ? ` data-image="${esc(lead.image)}"` : ''}>
+        ${lead.image ? `<img src="${esc(lead.image)}" alt="${esc(c.name)}" loading="lazy">` : initials(c.name)}
+      </div>
+      <div>
+        <div class="detail-name">${esc(c.name)}</div>
+        <div class="detail-family">${esc(c.family)}</div>
+      </div>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-box">
+        <div class="label">Occupation</div>
+        <div class="value">${c.occupation ? esc(c.occupation) : '—'}</div>
+      </div>
+      <div class="info-box">
+        <div class="label">First seen</div>
+        <div class="value">Season 1 · Episode ${c.revealEpisode}</div>
+      </div>
+    </div>
+
+    <div class="related">
+      <h4>Spouse / partner</h4>
+      <div class="rel-chips">
+        ${rel.spouse && rel.spouse.length
+          ? rel.spouse.map(n => `<span class="rel-chip">${esc(n)}</span>`).join('')
+          : '<span class="rel-chip" style="opacity:.6;">None shown yet</span>'}
+      </div>
+    </div>
+    <div class="related">
+      <h4>Parents</h4>
+      <div class="rel-chips">
+        ${rel.parents && rel.parents.length
+          ? rel.parents.map(n => `<span class="rel-chip">${esc(n)}</span>`).join('')
+          : '<span class="rel-chip" style="opacity:.6;">None listed</span>'}
+      </div>
+    </div>
+    <div class="related">
+      <h4>Children</h4>
+      <div class="rel-chips">
+        ${rel.children && rel.children.length
+          ? rel.children.map(n => `<span class="rel-chip">${esc(n)}</span>`).join('')
+          : '<span class="rel-chip" style="opacity:.6;">None listed</span>'}
+      </div>
+    </div>
+    <div class="related">
+      <h4>Siblings</h4>
+      <div class="rel-chips">
+        ${rel.siblings && rel.siblings.length
+          ? rel.siblings.map(n => `<span class="rel-chip">${esc(n)}</span>`).join('')
+          : '<span class="rel-chip" style="opacity:.6;">None listed</span>'}
+      </div>
+    </div>
+
+    <div class="versions">
+      <h4>Time versions</h4>
+      <div class="version-list">
+        ${
+          vv.length
+            ? vv.map(v => `
+              <div class="version-card">
+                <div class="vphoto${v.image ? ' image-clickable' : ''}"${v.image ? ` data-image="${esc(v.image)}"` : ''}>
+                  ${v.image ? `<img src="${esc(v.image)}" alt="${esc(c.name)} ${esc(v.label)}" loading="lazy">` : initials(c.name)}
+                </div>
+                <div class="vmeta">
+                  <div class="time">${esc(v.label)}</div>
+                </div>
+              </div>
+            `).join('')
+            : '<p style="font-size:.85rem;color:var(--muted);">No specific time versions listed yet.</p>'
+        }
+      </div>
+    </div>
+  `;
+}
+
+// ===== MAP LAYOUT & DRAWING =====
+function layoutNodes() {
+  const chars = visibleChars();
+  const groups = { Kahnwald: [], Nielsen: [], Doppler: [], Tiedemann: [], Other: [] };
+  chars.forEach(c => (groups[c.family] || groups.Other).push(c));
+
+  const canvas = document.getElementById('mapCanvas');
+  const rect = canvas.getBoundingClientRect();
+  const W = rect.width || 1200;
+  const top = 120;
+  const rowGap = 110;
+  const colGap = W / 5;
+  const positions = {};
+
+  Object.entries(groups).forEach(([fam, list], i) => {
+    list.forEach((c, idx) => {
+      positions[c.id] = { x: (i * colGap) + (colGap / 2), y: top + (idx * rowGap), c };
+    });
+  });
+
+  // Spouses side-by-side
+  chars.forEach(c => {
+    (c.relations?.spouse || []).forEach(name => {
+      const other = chars.find(x => x.name === name);
+      if (!other) return;
+      const a = positions[c.id];
+      const b = positions[other.id];
+      if (!a || !b) return;
+      const spacing = 68;
+      const midX = (a.x + b.x) / 2;
+      const midY = (a.y + b.y) / 2;
+      a.y = midY; b.y = midY;
+      a.x = midX - spacing / 2;
+      b.x = midX + spacing / 2;
+    });
+  });
+
+  return positions;
+}
+
+function drawArrowhead(ctx, x1, y1, x2, y2, color) {
+  const angle = Math.atan2(y2 - y1, x2 - x1);
+  ctx.save();
+  ctx.translate(x2, y2);
+  ctx.rotate(angle);
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.lineTo(-8, -4);
+  ctx.lineTo(-8, 4);
+  ctx.closePath();
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawMap() {
+  const canvas = document.getElementById('mapCanvas');
+  if (!canvas) return;
+
+  const rect = canvas.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  const W = rect.width;
+  const H = rect.height;
+
+  nodePositions = layoutNodes();
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle = '#111110';
+  ctx.fillRect(0,0,W,H);
+
+  ctx.save();
+  ctx.translate(mapTransform.x, mapTransform.y);
+  ctx.scale(mapTransform.scale, mapTransform.scale);
+
+  const chars = visibleChars();
+  const drawn = new Set();
+
+  // Links
+  chars.forEach(c => {
+    const from = nodePositions[c.id];
+    if (!from) return;
+    const rel = c.relations || { spouse: [], parents: [], children: [], siblings: [] };
+
+    // spouses (gold curved)
+    (rel.spouse || []).forEach(name => {
+      const other = chars.find(x => x.name === name);
+      if (!other || !nodePositions[other.id]) return;
+      const key = [c.id, other.id].sort().join('-');
+      if (drawn.has(key)) return;
+      drawn.add(key);
+      const to = nodePositions[other.id];
+      const mx = (from.x + to.x) / 2;
+      const my = from.y - 26;
+      ctx.beginPath();
+      ctx.moveTo(from.x, from.y - 4);
+      ctx.quadraticCurveTo(mx, my, to.x, to.y - 4);
+      ctx.strokeStyle = '#c9a84c';
+      ctx.lineWidth = 2.4;
+      ctx.globalAlpha = .9;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(mx, my + 8, 3, 0, Math.PI*2);
+      ctx.fillStyle = '#c9a84c';
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    });
+
+    // children (teal straight with arrow)
+    (rel.children || []).forEach(name => {
+      const child = chars.find(x => x.name === name);
+      if (!child || !nodePositions[child.id]) return;
+      const to = nodePositions[child.id];
+      const sx = from.x;
+      const sy = from.y + 24;
+      const ex = to.x;
+      const ey = to.y - 26;
+      ctx.beginPath();
+      ctx.moveTo(sx, sy);
+      ctx.lineTo(ex, ey);
+      ctx.strokeStyle = '#5ba3af';
+      ctx.lineWidth = 2.1;
+      ctx.globalAlpha = .9;
+      ctx.stroke();
+      drawArrowhead(ctx, sx, sy, ex, ey, '#5ba3af');
+      ctx.globalAlpha = 1;
+    });
+
+    // siblings (purple dashed)
+    (rel.siblings || []).forEach(name => {
+      const sib = chars.find(x => x.name === name);
+      if (!sib || !nodePositions[sib.id]) return;
+      const key = [c.id, sib.id].sort().join('-s-');
+      if (drawn.has(key)) return;
+      drawn.add(key);
+      const to = nodePositions[sib.id];
+      const midY = ((from.y + to.y) / 2) + 10;
+      ctx.beginPath();
+      ctx.moveTo(from.x, midY);
+      ctx.lineTo(to.x, midY);
+      ctx.strokeStyle = '#8b7cc8';
+      ctx.lineWidth = 1.7;
+      ctx.setLineDash([5,5]);
+      ctx.globalAlpha = .7;
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.globalAlpha = 1;
+    });
+  });
+
+  // nodes
+  chars.forEach(c => {
+    const pos = nodePositions[c.id];
+    if (!pos) return;
+    const { x, y } = pos;
+    const color = familyColor(c.family);
+    const isSelected = c.id === selectedId;
+
+    if (isSelected) {
+      ctx.beginPath();
+      ctx.arc(x, y, 38, 0, Math.PI*2);
+      ctx.fillStyle = color + '33';
+      ctx.fill();
+    }
+
+    ctx.beginPath();
+    ctx.arc(x, y, isSelected ? 27 : 24, 0, Math.PI*2);
+    ctx.fillStyle = '#191817';
+    ctx.fill();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = isSelected ? 3.2 : 2.1;
+    ctx.stroke();
+
+    ctx.fillStyle = color;
+    ctx.font = 'bold 11px system-ui';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(initials(c.name), x, y);
+
+    ctx.fillStyle = isSelected ? '#e8e3da' : '#a09890';
+    ctx.font = (isSelected ? 'bold ' : '') + '11px system-ui';
+    ctx.textBaseline = 'top';
+    const labelY = y + (isSelected ? 32 : 28);
+    ctx.fillText(c.name.split(' ')[0], x, labelY);
+  });
+
+  ctx.restore();
+}
+
+function setupMapInteractions() {
+  const canvas = document.getElementById('mapCanvas');
+  if (!canvas) return;
+  canvas.style.touchAction = 'none';
+
+  let moved = false;
+  let touchStartDist = 0;
+  let startScale = 1;
+  let startTouchPoint = null;
+
+  function handleMapTap(clientX, clientY) {
+    const rect = canvas.getBoundingClientRect();
+    const mx = (clientX - rect.left - mapTransform.x) / mapTransform.scale;
+    const my = (clientY - rect.top - mapTransform.y) / mapTransform.scale;
+    let hit = null;
+    Object.values(nodePositions).forEach(p => {
+      const dist = Math.hypot(mx - p.x, my - p.y);
+      if (dist < 32) hit = p.c;
+    });
+    if (hit) {
+      selectedId = hit.id;
+      drawMap();
+      switchTab('characters');
+      renderCards();
+      renderDetail();
+    }
+  }
+
+  // Mouse
+  canvas.addEventListener('mousedown', e => {
+    isDragging = true;
+    moved = false;
+    dragStart = { x: e.clientX - mapTransform.x, y: e.clientY - mapTransform.y };
+  });
+  canvas.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    moved = true;
+    mapTransform.x = e.clientX - dragStart.x;
+    mapTransform.y = e.clientY - dragStart.y;
+    drawMap();
+  });
+  canvas.addEventListener('mouseup', e => {
+    if (!moved) handleMapTap(e.clientX, e.clientY);
+    isDragging = false;
+  });
+  canvas.addEventListener('mouseleave', () => { isDragging = false; });
+
+  // Desktop wheel zoom
+  canvas.addEventListener('wheel', e => {
+    e.preventDefault();
+    const delta = e.deltaY > 0 ? 0.9 : 1.1;
+    mapTransform.scale = Math.max(0.3, Math.min(3, mapTransform.scale * delta));
+    drawMap();
+  }, { passive: false });
+
+  // Touch
+  canvas.addEventListener('touchstart', e => {
+    if (e.touches.length === 1) {
+      const t = e.touches[0];
+      isDragging = true;
+      moved = false;
+      startTouchPoint = { x: t.clientX, y: t.clientY };
+      dragStart = { x: t.clientX - mapTransform.x, y: t.clientY - mapTransform.y };
+    } else if (e.touches.length === 2) {
+      isDragging = false;
+      const [a,b] = e.touches;
+      touchStartDist = Math.hypot(a.clientX-b.clientX, a.clientY-b.clientY);
+      startScale = mapTransform.scale;
+    }
+  }, { passive: true });
+
+  canvas.addEventListener('touchmove', e => {
+    if (e.touches.length === 1 && isDragging) {
+      const t = e.touches[0];
+      if (startTouchPoint && Math.hypot(t.clientX-startTouchPoint.x, t.clientY-startTouchPoint.y) > 6) moved = true;
+      mapTransform.x = t.clientX - dragStart.x;
+      mapTransform.y = t.clientY - dragStart.y;
+      drawMap();
+    } else if (e.touches.length === 2 && touchStartDist) {
+      const [a,b] = e.touches;
+      const dist = Math.hypot(a.clientX-b.clientX, a.clientY-b.clientY);
+      mapTransform.scale = Math.max(0.3, Math.min(3, startScale * (dist / touchStartDist)));
+      drawMap();
+    }
+  }, { passive: true });
+
+  canvas.addEventListener('touchend', e => {
+    if (e.touches.length === 0 && startTouchPoint && !moved) handleMapTap(startTouchPoint.x, startTouchPoint.y);
+    if (e.touches.length < 2) touchStartDist = 0;
+    isDragging = false;
+    startTouchPoint = null;
+  });
+
+  // Zoom buttons
+  document.getElementById('mapZoomIn').addEventListener('click', () => {
+    mapTransform.scale = Math.min(3, mapTransform.scale * 1.2);
+    drawMap();
+  });
+  document.getElementById('mapZoomOut').addEventListener('click', () => {
+    mapTransform.scale = Math.max(0.3, mapTransform.scale * 0.8);
+    drawMap();
+  });
+  document.getElementById('mapReset').addEventListener('click', () => {
+    mapTransform = { x: 0, y: 0, scale: 1 };
+    drawMap();
+  });
+}
+
+// ===== IMAGE MODAL =====
+function visibleImagesForChar(charId) {
+  const c = S.characters.find(x => x.id === charId && x.revealEpisode <= S.currentEpisode);
+  if (!c) return [];
+  return visibleVersions(c).filter(v => v.image).map(v => ({
+    src: v.image,
+    title: c.name + (v.label ? ' — ' + v.label : '')
+  }));
+}
+function openImageModal(charId, src) {
+  const items = visibleImagesForChar(charId);
+  if (!items.length) return;
+  let idx = items.findIndex(it => it.src === src);
+  if (idx < 0) idx = 0;
+  const img = document.getElementById('imageModalImg');
+  img.src = items[idx].src;
+  document.getElementById('imageModal').classList.add('open');
+}
+function closeImageModal() {
+  document.getElementById('imageModal').classList.remove('open');
+}
+
+// ===== TABS & EPISODE LABEL =====
+function switchTab(tab) {
+  activeTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.tab === tab);
+  });
+  ['characters','map'].forEach(t => {
+    document.getElementById('tab-' + t).classList.toggle('hidden', t !== tab);
+  });
+  if (tab === 'characters') {
+    renderCards();
+    renderDetail();
+  } else if (tab === 'map') {
+    drawMap();
+  }
+}
+function updateEpisodeLabels() {
+  const ep = S.currentEpisode;
+  document.getElementById('episodeLabelH').textContent = 'S1·E' + ep;
+  document.getElementById('episodeLabelBig').textContent = 'S1·E' + ep;
+  document.getElementById('episodeRange').value = ep;
+}
+
+// ===== EDIT MODE & EDITOR UI =====
+function setEditMode(mode) {
+  editMode = mode;
+  document.body.dataset.editMode = mode;
+}
+function toggleEditMode() {
+  const newMode = editMode === 'on' ? 'off' : 'on';
+  setEditMode(newMode);
+}
+
+// Populate character select for editor
+function populateEditorCharSelect() {
+  const sel = document.getElementById('charSelect');
+  const list = mergeAndSortByName(S.characters);
+  sel.innerHTML = '<option value="">— New character —</option>' + list.map(c =>
+    `<option value="${esc(c.id)}">${esc(c.name)}</option>`
+  ).join('');
+}
+
+// Load selected character into editor fields
+function loadCharacterIntoEditor(id) {
+  const c = S.characters.find(x => x.id === id);
+  const fName = document.getElementById('fName');
+  const fFamily = document.getElementById('fFamily');
+  const fOcc = document.getElementById('fOcc');
+  const fReveal = document.getElementById('fReveal');
+  const fSpouse = document.getElementById('fSpouse');
+  const fParents = document.getElementById('fParents');
+  const fChildren = document.getElementById('fChildren');
+  const fSiblings = document.getElementById('fSiblings');
+  const vContainer = document.getElementById('versionListEdit');
+  const delBtn = document.getElementById('deleteCharBtn');
+
+  vContainer.innerHTML = '';
+
+  if (!c) {
+    fName.value = '';
+    fFamily.value = 'Other';
+    fOcc.value = '';
+    fReveal.value = S.currentEpisode;
+    fSpouse.value = '';
+    fParents.value = '';
+    fChildren.value = '';
+    fSiblings.value = '';
+    delBtn.classList.add('hidden');
+    return;
+  }
+
+  fName.value = c.name;
+  fFamily.value = c.family;
+  fOcc.value = c.occupation || '';
+  fReveal.value = c.revealEpisode || S.currentEpisode;
+  fSpouse.value = (c.relations?.spouse || []).join(', ');
+  fParents.value = (c.relations?.parents || []).join(', ');
+  fChildren.value = (c.relations?.children || []).join(', ');
+  fSiblings.value = (c.relations?.siblings || []).join(', ');
+
+  (c.versions || []).forEach(v => appendVersionEditorBlock(v));
+  delBtn.classList.remove('hidden');
+}
+
+function appendVersionEditorBlock(v) {
+  const container = document.getElementById('versionListEdit');
+  const block = document.createElement('div');
+  block.className = 've-block';
+  block.innerHTML = `
+    <div class="ve-row">
+      <div class="field">
+        <label>Time label</label>
+        <input type="text" class="ve-label" value="${esc(v.label || '')}">
+      </div>
+      <div class="field">
+        <label>Reveal episode</label>
+        <input type="number" class="ve-reveal" min="1" max="10" value="${Number(v.revealEpisode || S.currentEpisode)}">
+      </div>
+    </div>
+    <div class="field">
+      <label>Image URL</label>
+      <input type="text" class="ve-image" value="${esc(v.image || '')}">
+    </div>
+    <div class="ve-actions">
+      <span class="muted" style="font-size:.8rem;">This version will only show when episode cap ≥ reveal episode.</span>
+      <button type="button" class="btn sm danger ve-remove">Remove</button>
+    </div>
+  `;
+  block.querySelector('.ve-remove').addEventListener('click', () => {
+    block.remove();
+  });
+  container.appendChild(block);
+}
+
+function collectVersionsFromEditor() {
+  const blocks = document.querySelectorAll('#versionListEdit .ve-block');
+  const versions = [];
+  blocks.forEach(block => {
+    const label = block.querySelector('.ve-label').value.trim();
+    if (!label) return;
+    const img = block.querySelector('.ve-image').value.trim();
+    const rev = Number(block.querySelector('.ve-reveal').value || S.currentEpisode);
+    versions.push({
+      label,
+      image: img,
+      revealEpisode: rev
+    });
+  });
+  return versions;
+}
+
+function saveCharacterFromEditor() {
+  const sel = document.getElementById('charSelect');
+  const id = sel.value || 'c_' + Date.now();
+  const fName = document.getElementById('fName').value.trim();
+  if (!fName) {
+    alert('Name is required.');
+    return;
+  }
+  const cExistingIndex = S.characters.findIndex(x => x.id === id);
+  const payload = {
+    id,
+    name: fName,
+    family: document.getElementById('fFamily').value || 'Other',
+    occupation: document.getElementById('fOcc').value.trim(),
+    revealEpisode: Number(document.getElementById('fReveal').value || S.currentEpisode),
+    relations: {
+      spouse: splitCSV(document.getElementById('fSpouse').value),
+      parents: splitCSV(document.getElementById('fParents').value),
+      children: splitCSV(document.getElementById('fChildren').value),
+      siblings: splitCSV(document.getElementById('fSiblings').value)
+    },
+    versions: collectVersionsFromEditor()
+  };
+
+  if (cExistingIndex >= 0) {
+    S.characters[cExistingIndex] = payload;
+  } else {
+    S.characters.push(payload);
+    sel.value = id;
+  }
+  selectedId = id;
+  populateEditorCharSelect();
+  renderCards();
+  renderDetail();
+  if (activeTab === 'map') drawMap();
+}
+
+function deleteCharacterFromEditor() {
+  const sel = document.getElementById('charSelect');
+  const id = sel.value;
+  if (!id) return;
+  if (!confirm('Delete this character?')) return;
+  S.characters = S.characters.filter(c => c.id !== id);
+  if (selectedId === id) selectedId = null;
+  document.getElementById('fName').value = '';
+  document.getElementById('versionListEdit').innerHTML = '';
+  sel.value = '';
+  document.getElementById('deleteCharBtn').classList.add('hidden');
+  populateEditorCharSelect();
+  renderCards();
+  renderDetail();
+  if (activeTab === 'map') drawMap();
+}
+
+function exportJSON() {
+  const data = {
+    currentEpisode: S.currentEpisode,
+    characters: S.characters
+  };
+  const text = JSON.stringify(data, null, 2);
+  const blob = new Blob([text], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `dark-characters-s1e${S.currentEpisode}.json`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+// ===== BOOT =====
+window.addEventListener('DOMContentLoaded', () => {
+  S.currentEpisode = SEED.currentEpisode;
+  setEditMode('off');
+  updateEpisodeLabels();
+  selectedId = visibleChars()[0]?.id || null;
+
+  renderCards();
+  renderDetail();
+  populateEditorCharSelect();
+  setupMapInteractions();
+
+  // Tabs
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+  });
+
+  // Filters
+  document.getElementById('searchInput').addEventListener('input', renderCards);
+  document.getElementById('familyFilter').addEventListener('change', renderCards);
+
+  // Card click
+  document.getElementById('cardsGrid').addEventListener('click', e => {
+    const card = e.target.closest('.char-card');
+    if (!card) return;
+    selectedId = card.getAttribute('data-id');
+    renderCards();
+    renderDetail();
+  });
+
+  // View toggle
+  document.getElementById('viewToggle').addEventListener('click', () => {
+    characterViewMode = characterViewMode === 'alphabetical' ? 'family' : 'alphabetical';
+    document.getElementById('viewToggle').textContent =
+      characterViewMode === 'alphabetical' ? 'View: Alphabetical' : 'View: By family';
+    renderCards();
+  });
+
+  // Theme toggle (simple light/dark flip)
+  document.getElementById('themeBtn').addEventListener('click', () => {
+    const current = root.getAttribute('data-theme') || 'dark';
+    root.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+    if (activeTab === 'map') drawMap();
+  });
+
+  // Edit mode toggle (button)
+  document.getElementById('editToggleBtn').addEventListener('click', () => {
+    toggleEditMode();
+  });
+
+  // Episode slider
+  document.getElementById('episodeRange').addEventListener('input', e => {
+    S.currentEpisode = Number(e.target.value || S.currentEpisode);
+    updateEpisodeLabels();
+    renderCards();
+    renderDetail();
+    if (activeTab === 'map') drawMap();
+  });
+
+  // Character selector in editor
+  document.getElementById('charSelect').addEventListener('change', e => {
+    const id = e.target.value;
+    loadCharacterIntoEditor(id);
+  });
+
+  // Add version
+  document.getElementById('addVersionBtn').addEventListener('click', () => {
+    appendVersionEditorBlock({ label: '', image: '', revealEpisode: S.currentEpisode });
+  });
+
+  // Save / delete
+  document.getElementById('saveCharBtn').addEventListener('click', saveCharacterFromEditor);
+  document.getElementById('deleteCharBtn').addEventListener('click', deleteCharacterFromEditor);
+
+  // Export
+  document.getElementById('exportBtn').addEventListener('click', exportJSON);
+
+  // Edit mode keyboard shortcut: Ctrl+Shift+P (Win) / Cmd+Shift+P (Mac)
+  document.addEventListener('keydown', e => {
+    const isMac = navigator.platform.toUpperCase().includes('MAC');
+    const mod = isMac ? e.metaKey : e.ctrlKey;
+    if (mod && e.shiftKey && e.key.toLowerCase() === 'p') {
+      e.preventDefault();
+      toggleEditMode();
+    }
+  });
+
+  // Edit mode logo taps (mobile)
+  (() => {
+    const logo = document.getElementById('appLogo');
+    if (!logo) return;
+    let taps = 0;
+    let resetTimer = null;
+    logo.addEventListener('click', () => {
+      taps++;
+      if (resetTimer) clearTimeout(resetTimer);
+      resetTimer = setTimeout(() => { taps = 0; }, 900);
+      if (taps >= 5) {
+        taps = 0;
+        toggleEditMode();
+      }
+    });
+  })();
+
+  // Image modal wiring
+  document.addEventListener('click', e => {
+    const modalBg = document.getElementById('imageModal');
+    if (modalBg.classList.contains('open') && e.target === modalBg) {
+      closeImageModal();
+      return;
+    }
+    const t = e.target.closest('[data-image]');
+    if (t) {
+      const src = t.dataset.image;
+      if (selectedId) openImageModal(selectedId, src);
+    }
+  });
+  document.getElementById('imageModal').addEventListener('click', closeImageModal);
+
+  // Redraw map on resize (to avoid stretch)
+  window.addEventListener('resize', () => {
+    if (activeTab === 'map') drawMap();
+  });
+});
+</script>
+</body>
+</html>
