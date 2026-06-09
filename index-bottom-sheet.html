@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-mode="viewer">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dark – Character Guide</title>
+  <style>
+    :root {
+      --bg: #111110;
+      --surface: #191817;
+      --surface-2: #201f1d;
+      --surface-3: #2a2926;
+      --border: rgba(255,255,255,.08);
+      --border-strong: rgba(255,255,255,.16);
+      --text: #e8e3da;
+      --muted: #a09890;
+      --faint: #6a6460;
+      --accent: #5ba3af;
+      --accent-soft: #2d7d87;
+      --gold: #c9a84c;
+      --danger: #c06090;
+      --family-kahnwald: #5ba3af;
+      --family-nielsen: #c9a84c;
+      --family-doppler: #8b7cc8;
+      --family-tiedemann: #b07060;
+      --family-other: #7a9070;
+      --radius: 18px;
+      --radius-sm: 12px;
+      --radius-xs: 8px;
+      --shadow-sm: 0 8px 24px rgba(0,0,0,.32);
+      --shadow-lg: 0 18px 60px rgba(0,0,0,.55);
+      --font: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      --transition: 0.2s cubic-bezier(.16,1,.3,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; text-size-adjust: none; scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #1b1a18 0, #111110 45%, #080807 100%);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.55;
+    }
+    body.sheet-active { overflow: hidden; }
+    img { display: block; max-width: 100%; height: auto; }
+    button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+    input, select, textarea { font: inherit; color: inherit; }
+    p { max-width: 70ch; }
+
+    .hidden { display: none !important; }
+    .muted { color: var(--muted); }
+
+    .app {
+      max-width: 1560px;
+      margin: 0 auto;
+      padding: clamp(1rem, 3vw, 2rem);
+    }
+
+    .app-header {
+      position: sticky;
+      top: 0.75rem;
+      z-index: 10;
+      background: rgba(17,17,16,.9);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.1);
+      padding: 1.1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-sm);
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    body[data-edit-mode="on"] .app-header {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 2px rgba(201,168,76,.38);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      user-select: none;
+      min-width: 0;
+    }
+    .logo-mark {
+      width: 36px; height: 36px;
+      min-width: 36px;
+      flex: 0 0 36px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #1e3a3d, #111110);
+      border: 1px solid rgba(91,163,175,.35);
+      display: grid; place-items: center;
+      box-shadow: 0 0 0 1px rgba(0,0,0,.6), 0 0 18px rgba(91,163,175,.18);
+    }
+    .logo-mark svg { display: block; }
+    .logo-text { line-height: 1.1; min-width: 0; }
+    .logo-text strong { font-size: 1.1rem; letter-spacing: .04em; }
+    .logo-text span { display: block; font-size: .78rem; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; }
+
+    .header-right { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .55rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-strong);
+      background: rgba(255,255,255,.02);
+      font-size: .86rem;
+      white-space: nowrap;
+      transition: var(--transition);
+      min-height: 36px;
+    }
+    .btn:hover { background: rgba(255,255,255,.06); transform: translateY(-1px); }
+    .btn.primary { background: linear-gradient(135deg, var(--accent-soft), var(--accent)); border-color: transparent; color: #fff; }
+    .btn.primary:hover { filter: brightness(1.05); }
+    .btn.ghost { background: transparent; border-color: var(--border); }
+    .btn.sm { padding: .45rem .8rem; font-size: .8rem; min-height: 32px; }
+    .btn.danger { background: rgba(192,96,144,.12); color: var(--danger); }
+
+    .episode-pill {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .45rem .9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.4);
+      font-size: .8rem;
+    }
+    .episode-pill strong { color: var(--gold); letter-spacing: .08em; }
+
+    .main { margin-top: 1.5rem; }
+
+    .edit-banner {
+      display: none;
+      margin-bottom: 1rem;
+      padding: .8rem 1rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.6);
+      font-size: .85rem;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+      flex-wrap: wrap;
+    }
+    body[data-edit-mode="on"] .edit-banner { display: flex; }
+
+    .tabs {
+      display: flex;
+      gap: .5rem;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      margin-bottom: 1rem;
+      padding-bottom: .35rem;
+    }
+    .tab-btn {
+      padding: .45rem .9rem;
+      border-radius: var(--radius-xs) var(--radius-xs) 0 0;
+      border: 1px solid transparent;
+      font-size: .86rem;
+      color: var(--muted);
+      transition: var(--transition);
+    }
+    .tab-btn.active {
+      border-color: rgba(255,255,255,.24);
+      border-bottom-color: #111110;
+      background: #111110;
+      color: var(--text);
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      margin-bottom: 1rem;
+      align-items: center;
+    }
+    .filter-bar .input-wrap {
+      position: relative;
+      flex: 1;
+      min-width: 180px;
+      max-width: 340px;
+    }
+    .filter-bar input,
+    .filter-bar select {
+      width: 100%;
+      padding: .7rem .9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.2);
+      background: rgba(0,0,0,.5);
+      font-size: .9rem;
+      outline: none;
+      transition: var(--transition);
+    }
+    .filter-bar input:focus,
+    .filter-bar select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(91,163,175,.16);
+    }
+
+    .cards-layout {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 1.25rem;
+      align-items: flex-start;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
+      gap: .9rem;
+    }
+
+    .char-card {
+      background: rgba(0,0,0,.5);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.08);
+      padding: 1.1rem;
+      display: grid;
+      gap: .8rem;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .char-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(91,163,175,.16), transparent 52%);
+      opacity: 0;
+      transition: opacity var(--transition);
+      pointer-events: none;
+    }
+    .char-card:hover::before { opacity: .7; }
+    .char-card.selected {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(91,163,175,.3);
+    }
+
+    .card-top {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: .75rem;
+      align-items: center;
+    }
+    .avatar {
+      width: 52px; height: 52px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: radial-gradient(circle at 20% 20%, var(--surface-3), var(--surface));
+      display: grid; place-items: center;
+      font-weight: 700; font-size: 1rem;
+      color: var(--muted);
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+    .char-name { font-weight: 600; font-size: 1rem; margin-bottom: .2rem; }
+    .char-meta {
+      display: flex; flex-wrap: wrap; gap: .35rem; align-items: center;
+      font-size: .8rem; color: var(--muted);
+    }
+    .ftag {
+      display: inline-flex; align-items: center; gap: .3rem;
+      padding: .2rem .55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.5);
+    }
+    .fdot { width: .5rem; height: .5rem; border-radius: 50%; flex-shrink: 0; }
+    .fdot.Kahnwald { background: var(--family-kahnwald); }
+    .fdot.Nielsen { background: var(--family-nielsen); }
+    .fdot.Doppler { background: var(--family-doppler); }
+    .fdot.Tiedemann { background: var(--family-tiedemann); }
+    .fdot.Other { background: var(--family-other); }
+
+    .versions-mini { display: flex; flex-wrap: wrap; gap: .35rem; font-size: .78rem; }
+    .version-pill {
+      padding: .16rem .5rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.4);
+      color: var(--muted);
+    }
+
+    .detail-panel {
+      position: sticky;
+      top: 5.4rem;
+      max-height: calc(100vh - 6rem);
+      overflow-y: auto;
+      background: rgba(0,0,0,.6);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      padding: 1.2rem 1.1rem 1.4rem;
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      gap: 1rem;
+    }
+    .detail-empty {
+      min-height: 220px;
+      display: grid; place-items: center;
+      color: var(--muted);
+      font-size: .9rem;
+      text-align: center;
+      gap: .5rem;
+    }
+
+    .sheet-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.56);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 24;
+      opacity: 0;
+      transition: opacity .25s ease;
+    }
+    .sheet-backdrop.open {
+      display: block;
+      opacity: 1;
+    }
+    .sheet-handle {
+      display: none;
+      width: 42px;
+      height: 5px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.16);
+      margin: -.15rem auto .75rem;
+    }
+    .sheet-close {
+      display: none;
+      position: absolute;
+      top: .8rem;
+      right: .8rem;
+      width: 34px;
+      height: 34px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    .detail-hero {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: .9rem;
+      align-items: center;
+      margin-bottom: .5rem;
+    }
+    .detail-avatar {
+      width: 80px; height: 80px;
+      border-radius: 22px;
+      overflow: hidden;
+      background: radial-gradient(circle at 20% 20%, var(--surface-3), var(--surface));
+      display: grid; place-items: center;
+      font-weight: 700; font-size: 1.3rem;
+      color: var(--muted);
+    }
+    .detail-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .detail-name { font-size: 1.3rem; font-weight: 700; margin-bottom: .2rem; }
+    .detail-family { font-size: .86rem; color: var(--muted); }
+
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; }
+    .info-box {
+      padding: .7rem;
+      border-radius: var(--radius-xs);
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.5);
+    }
+    .info-box .label { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--faint); margin-bottom: .25rem; }
+    .info-box .value { font-size: .9rem; }
+
+    .related { margin-bottom: .75rem; }
+    .related h4 { font-size: .74rem; text-transform: uppercase; letter-spacing: .1em; color: var(--faint); margin-bottom: .4rem; }
+    .rel-chips { display: flex; flex-wrap: wrap; gap: .35rem; }
+    .rel-chip {
+      display: inline-flex; align-items: center; gap: .3rem;
+      padding: .3rem .6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.5);
+      font-size: .8rem;
+    }
+
+    .versions { border-top: 1px solid rgba(255,255,255,.12); padding-top: .8rem; }
+    .versions h4 { font-size: .8rem; margin-bottom: .5rem; }
+    .version-list { display: grid; gap: .65rem; }
+    .version-card { display: grid; grid-template-columns: 70px 1fr; gap: .75rem; align-items: center; }
+    .vphoto {
+      width: 70px; height: 70px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: radial-gradient(circle at 20% 20%, var(--surface-3), var(--surface));
+      display: grid; place-items: center;
+      font-weight: 700; font-size: 1rem;
+      color: var(--muted);
+    }
+    .vphoto img { width: 100%; height: 100%; object-fit: cover; }
+    .vmeta .time { font-size: .86rem; font-weight: 600; }
+
+    #tab-map.hidden, #tab-characters.hidden { display: none; }
+
+    .map-wrapper {
+      margin-top: .9rem;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.16);
+      background: radial-gradient(circle at top,#1c1b19,#0b0b0a);
+      padding: .9rem .9rem 1rem;
+    }
+    .map-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      align-items: center;
+      margin-bottom: .6rem;
+    }
+    .map-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      align-items: center;
+      font-size: .78rem;
+      color: var(--muted);
+    }
+    .map-legend-item { display: inline-flex; align-items: center; gap: .35rem; }
+    .map-legend-dot { width: .55rem; height: .55rem; border-radius: 50%; }
+
+    #mapCanvas {
+      width: 100%;
+      height: 520px;
+      border-radius: calc(var(--radius) - 4px);
+      border: 1px solid rgba(255,255,255,.18);
+      display: block;
+      background: radial-gradient(circle at top,#1c1b19,#070707);
+      touch-action: none;
+    }
+
+    .image-clickable { cursor: zoom-in; }
+    .image-modal-bg {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.84);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 50;
+      backdrop-filter: blur(6px);
+    }
+    .image-modal-bg.open { display: flex; }
+    .image-modal {
+      width: min(960px, 100%);
+      max-height: 92vh;
+      display: grid;
+      gap: .8rem;
+      justify-items: center;
+    }
+    .image-modal-stage img {
+      max-width: min(100%, 860px);
+      max-height: 76vh;
+      border-radius: 22px;
+      box-shadow: var(--shadow-lg);
+    }
+    .image-modal-note { font-size: .8rem; color: var(--muted); }
+
+    #editorPanel {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      padding: 1rem 1.1rem;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.75);
+      display: grid;
+      gap: .9rem;
+    }
+    body[data-edit-mode="off"] #editorPanel { display: none; }
+    body[data-edit-mode="on"] #editorPanel { display: grid; }
+
+    .editor-grid { display: grid; grid-template-columns: 1.2fr 1.1fr; gap: 1rem; }
+    .field { display: grid; gap: .35rem; }
+    .field label { font-size: .8rem; color: var(--muted); }
+    .field input, .field select, .field textarea {
+      padding: .6rem .7rem;
+      border-radius: var(--radius-xs);
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(0,0,0,.6);
+      outline: none;
+      font-size: .86rem;
+      min-height: 36px;
+    }
+    .field textarea { min-height: 80px; resize: vertical; }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(91,163,175,.2);
+    }
+
+    .versions-edit { border-top: 1px solid rgba(255,255,255,.16); padding-top: .75rem; }
+    .ve-block {
+      padding: .7rem;
+      border-radius: var(--radius-xs);
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(0,0,0,.6);
+      display: grid;
+      gap: .45rem;
+      margin-bottom: .55rem;
+    }
+    .ve-row { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+    .ve-actions { display: flex; justify-content: space-between; align-items: center; gap: .5rem; }
+    .editor-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+
+    .toast {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--surface-3);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 999px;
+      padding: .6rem 1.2rem;
+      font-size: .85rem;
+      opacity: 0;
+      transition: opacity .3s, transform .3s;
+      z-index: 100;
+      pointer-events: none;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    @media (max-width: 1100px) {
+      .cards-layout { grid-template-columns: 1fr; }
+      .detail-panel {
+        position: fixed;
+        left: .75rem;
+        right: .75rem;
+        bottom: 0;
+        top: auto;
+        z-index: 25;
+        max-height: min(78vh, 680px);
+        margin-top: 0;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        padding: .95rem 1rem calc(1.25rem + env(safe-area-inset-bottom));
+        transform: translateY(calc(100% + 1rem));
+        opacity: 0;
+        pointer-events: none;
+        transition: transform .34s cubic-bezier(.16,1,.3,1), opacity .2s ease;
+        overscroll-behavior: contain;
+      }
+      .detail-panel.sheet-open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .detail-panel.sheet-ready { display: grid; }
+      .detail-panel .detail-empty {
+        min-height: 0;
+        padding: 1rem 0 0;
+      }
+      .sheet-handle,
+      .sheet-close {
+        display: flex;
+      }
+      .sheet-handle { display: block; }
+      .editor-grid { grid-template-columns: 1fr; }
+    }
+    @media (min-width: 1101px) {
+      .sheet-backdrop,
+      .sheet-handle,
+      .sheet-close {
+        display: none !important;
+      }
+    }
+    @media (max-width: 700px) {
+      #mapCanvas { height: 640px; }
+      .detail-hero { grid-template-columns: 68px 1fr; }
+      .detail-avatar { width: 68px; height: 68px; border-radius: 18px; }
+      .info-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      #mapCanvas { height: 580px; }
+      .map-toolbar { gap: .35rem; }
+      .btn.sm { padding: .4rem .65rem; font-size: .76rem; }
+      .detail-panel {
+        left: .5rem;
+        right: .5rem;
+        max-height: 82vh;
+      }
+    }
+  </style>
+</head>
+<body data-edit-mode="off">
+<div class="app">
+  <header class="app-header">
+    <div class="logo" id="appLogo">
+      <div class="logo-mark">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-label="Dark guide logo">
+          <polygon points="4,2 16,2 10,9" fill="none" stroke="#5ba3af" stroke-width="1.4" stroke-linejoin="round"/>
+          <polygon points="4,18 16,18 10,11" fill="none" stroke="#5ba3af" stroke-width="1.4" stroke-linejoin="round"/>
+          <circle cx="10" cy="10" r="1.4" fill="#c9a84c"/>
+          <line x1="4" y1="2" x2="16" y2="2" stroke="#5ba3af" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="4" y1="18" x2="16" y2="18" stroke="#5ba3af" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <strong>Dark</strong>
+        <span>Character guide</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="episode-pill">
+        <span>Episode</span>
+        <strong id="episodeLabelH">S1·E4</strong>
+      </span>
+      <button class="btn ghost" type="button" id="themeBtn">Theme</button>
+      <button class="btn sm ghost" type="button" id="viewToggle">View: Alphabetical</button>
+      <button class="btn sm primary" type="button" id="editToggleBtn">Edit</button>
+    </div>
+  </header>
+
+  <div class="edit-banner">
+    <div>
+      <strong>Editor mode</strong>
+      <span class="muted">Edit characters below, then Export JSON to save your changes permanently.</span>
+    </div>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+      <button class="btn sm ghost" type="button" id="importBtn">Import JSON</button>
+      <input type="file" id="importFile" accept=".json" style="display:none">
+      <button class="btn sm ghost" type="button" id="exportBtn">Export JSON</button>
+    </div>
+  </div>
+
+  <section id="editorPanel">
+    <div class="editor-grid">
+      <div>
+        <div class="field">
+          <label for="episodeRange">Episode cap (only data at or below this episode is visible)</label>
+          <input type="range" id="episodeRange" min="1" max="26" value="4" />
+          <div class="muted"><strong id="episodeLabelBig">S1·E4</strong></div>
+        </div>
+        <div class="field">
+          <label for="charSelect">Character to edit</label>
+          <select id="charSelect">
+            <option value="">— New character —</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label for="fName">Name</label>
+          <input id="fName" type="text" placeholder="Full name" />
+        </div>
+        <div class="field">
+          <label for="fFamily">Family</label>
+          <select id="fFamily">
+            <option value="Kahnwald">Kahnwald</option>
+            <option value="Nielsen">Nielsen</option>
+            <option value="Doppler">Doppler</option>
+            <option value="Tiedemann">Tiedemann</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="fOcc">Occupation / role</label>
+          <input id="fOcc" type="text" placeholder="Student, police officer, etc." />
+        </div>
+        <div class="field">
+          <label for="fReveal">First seen (episode number)</label>
+          <input id="fReveal" type="number" min="1" max="26" value="1" />
+        </div>
+      </div>
+    </div>
+
+    <div class="editor-grid">
+      <div>
+        <div class="field">
+          <label for="fSpouse">Spouse / partner (comma separated)</label>
+          <input id="fSpouse" type="text" />
+        </div>
+        <div class="field">
+          <label for="fParents">Parents (comma separated)</label>
+          <input id="fParents" type="text" />
+        </div>
+        <div class="field">
+          <label for="fChildren">Children (comma separated)</label>
+          <input id="fChildren" type="text" />
+        </div>
+        <div class="field">
+          <label for="fSiblings">Siblings (comma separated)</label>
+          <input id="fSiblings" type="text" />
+        </div>
+      </div>
+      <div class="versions-edit">
+        <div class="ve-actions">
+          <strong style="font-size:.9rem;">Time versions</strong>
+          <button class="btn sm ghost" type="button" id="addVersionBtn">Add version</button>
+        </div>
+        <div id="versionListEdit"></div>
+      </div>
+    </div>
+
+    <div class="editor-actions">
+      <button class="btn primary" type="button" id="saveCharBtn">Save character</button>
+      <button class="btn danger hidden" type="button" id="deleteCharBtn">Delete character</button>
+    </div>
+  </section>
+
+  <main class="main">
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="characters" type="button">Characters</button>
+      <button class="tab-btn" data-tab="map" type="button">Family map</button>
+    </div>
+
+    <section id="tab-characters">
+      <div class="filter-bar">
+        <div class="input-wrap">
+          <input id="searchInput" type="search" placeholder="Search name, family, role" />
+        </div>
+        <select id="familyFilter">
+          <option value="All">All families</option>
+          <option value="Kahnwald">Kahnwald</option>
+          <option value="Nielsen">Nielsen</option>
+          <option value="Doppler">Doppler</option>
+          <option value="Tiedemann">Tiedemann</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="cards-layout">
+        <div id="cardsGrid"></div>
+        <aside class="detail-panel" id="detailPanel">
+          <div class="detail-empty">
+            <p>Select a character to see details.</p>
+            <p class="muted">Use the Family map to click a node, or pick a card on the left.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="tab-map" class="hidden">
+      <div class="map-wrapper">
+        <div class="map-toolbar">
+          <button class="btn sm" id="mapZoomIn" type="button">＋ Zoom in</button>
+          <button class="btn sm" id="mapZoomOut" type="button">－ Zoom out</button>
+          <button class="btn sm" id="mapReset" type="button">Reset view</button>
+          <div class="map-legend">
+            <span>Families:</span>
+            <span class="map-legend-item"><span class="map-legend-dot" style="background:var(--family-kahnwald)"></span>Kahnwald</span>
+            <span class="map-legend-item"><span class="map-legend-dot" style="background:var(--family-nielsen)"></span>Nielsen</span>
+            <span class="map-legend-item"><span class="map-legend-dot" style="background:var(--family-doppler)"></span>Doppler</span>
+            <span class="map-legend-item"><span class="map-legend-dot" style="background:var(--family-tiedemann)"></span>Tiedemann</span>
+            <span class="map-legend-item"><span class="map-legend-dot" style="background:var(--family-other)"></span>Other</span>
+          </div>
+        </div>
+        <canvas id="mapCanvas"></canvas>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="sheet-backdrop" id="sheetBackdrop"></div>
+
+<div class="image-modal-bg" id="imageModal">
+  <div class="image-modal" role="dialog" aria-modal="true">
+    <div class="image-modal-stage">
+      <img id="imageModalImg" alt="Character image" />
+    </div>
+    <p class="image-modal-note">Tap anywhere to close.</p>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const LS_KEY = 'dark-guide-data';
+
+let S = { currentEpisode: 4, characters: [] };
+let selectedId = null;
+let activeTab = 'characters';
+let characterViewMode = 'alphabetical';
+let editMode = 'off';
+let mapTransform = { x: 0, y: 0, scale: 1 };
+let isDragging = false;
+let dragStart = { x: 0, y: 0 };
+let nodePositions = {};
+const root = document.documentElement;
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2400);
+}
+
+function saveToLocalStorage() {
+  try { localStorage.setItem(LS_KEY, JSON.stringify(S)); } catch(e) {}
+}
+function loadFromLocalStorage() {
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch(e) {}
+  return null;
+}
+
+async function initData() {
+  const lsData = loadFromLocalStorage();
+
+  try {
+    const res = await fetch('./data.json?v=' + Date.now());
+    if (res.ok) {
+      const remote = await res.json();
+      if (lsData && lsData.characters && lsData.characters.length >= remote.characters.length) {
+        S = lsData;
+      } else {
+        S = remote;
+        saveToLocalStorage();
+      }
+    } else {
+      throw new Error('fetch failed');
+    }
+  } catch(e) {
+    if (lsData) {
+      S = lsData;
+    }
+  }
+  bootApp();
+}
+
+function esc(s) {
+  return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/\"/g,'&quot;');
+}
+function initials(name) {
+  return name.split(' ').filter(Boolean).slice(0,2).map(w => w[0]).join('').toUpperCase();
+}
+function visibleChars() {
+  return S.characters.filter(c => c.revealEpisode <= S.currentEpisode);
+}
+function visibleVersions(c) {
+  return (c.versions || []).filter(v => v.revealEpisode <= S.currentEpisode);
+}
+function familyColor(f) {
+  const styles = getComputedStyle(root);
+  const map = {
+    Kahnwald: styles.getPropertyValue('--family-kahnwald').trim(),
+    Nielsen: styles.getPropertyValue('--family-nielsen').trim(),
+    Doppler: styles.getPropertyValue('--family-doppler').trim(),
+    Tiedemann: styles.getPropertyValue('--family-tiedemann').trim(),
+    Other: styles.getPropertyValue('--family-other').trim()
+  };
+  return map[f] || map.Other;
+}
+function splitCSV(str) {
+  return String(str || '').split(',').map(v => v.trim()).filter(Boolean);
+}
+function mergeAndSortByName(list) {
+  return [...list].sort((a,b) => a.name.localeCompare(b.name));
+}
+function episodeLabel(n) {
+  return 'S' + (n <= 10 ? '1' : n <= 20 ? '2' : '3') + '·E' + ((n - 1) % 10 + 1);
+}
+
+function isMobileSheetMode() {
+  return window.innerWidth <= 1100;
+}
+
+function openDetailSheet() {
+  if (!isMobileSheetMode()) return;
+  const panel = document.getElementById('detailPanel');
+  const backdrop = document.getElementById('sheetBackdrop');
+  if (!panel) return;
+  panel.classList.add('sheet-ready');
+  requestAnimationFrame(() => {
+    panel.classList.add('sheet-open');
+    backdrop.classList.add('open');
+    document.body.classList.add('sheet-active');
+  });
+}
+
+function closeDetailSheet() {
+  const panel = document.getElementById('detailPanel');
+  const backdrop = document.getElementById('sheetBackdrop');
+  panel.classList.remove('sheet-open');
+  backdrop.classList.remove('open');
+  document.body.classList.remove('sheet-active');
+}
+
+function syncSheetForViewport() {
+  const panel = document.getElementById('detailPanel');
+  const backdrop = document.getElementById('sheetBackdrop');
+  if (!isMobileSheetMode()) {
+    panel.classList.remove('sheet-open', 'sheet-ready');
+    backdrop.classList.remove('open');
+    document.body.classList.remove('sheet-active');
+  }
+}
+
+function renderCardHTML(c) {
+  const vv = visibleVersions(c);
+  const lead = vv[0] || {};
+  const selected = c.id === selectedId;
+  return `
+    <article class="char-card${selected ? ' selected' : ''}" data-id="${esc(c.id)}">
+      <div class="card-top">
+        <div class="avatar${lead.image ? ' image-clickable' : ''}"${lead.image ? ` data-image="${esc(lead.image)}"` : ''}>
+          ${lead.image ? `<img src="${esc(lead.image)}" alt="${esc(c.name)}" loading="lazy">` : initials(c.name)}
+        </div>
+        <div>
+          <div class="char-name">${esc(c.name)}</div>
+          <div class="char-meta">
+            <span class="ftag"><span class="fdot ${esc(c.family)}"></span>${esc(c.family)}</span>
+            ${c.occupation ? `<span>${esc(c.occupation)}</span>` : ''}
+          </div>
+        </div>
+      </div>
+      <div class="versions-mini">
+        ${vv.map(v => `<span class="version-pill">${esc(v.label)}</span>`).join('')}
+      </div>
+    </article>
+  `;
+}
+
+function renderCards() {
+  const container = document.getElementById('cardsGrid');
+  const term = document.getElementById('searchInput').value.trim().toLowerCase();
+  const family = document.getElementById('familyFilter').value;
+  let list = visibleChars();
+
+  if (family !== 'All') list = list.filter(c => c.family === family);
+  if (term) list = list.filter(c => [c.name, c.family, c.occupation].join(' ').toLowerCase().includes(term));
+
+  if (!list.length) {
+    container.innerHTML = '<div style="padding:1.2rem;color:var(--muted);">No characters match this filter yet.</div>';
+    return;
+  }
+
+  let html = '';
+  if (characterViewMode === 'alphabetical') {
+    list = mergeAndSortByName(list);
+    html = `<div class="cards-grid">${list.map(renderCardHTML).join('')}</div>`;
+  } else {
+    const famOrder = ['Kahnwald','Nielsen','Doppler','Tiedemann','Other'];
+    famOrder.forEach(fam => {
+      const group = list.filter(c => c.family === fam);
+      if (!group.length) return;
+      html += `<h3 style="font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;color:var(--faint);margin:.6rem .1rem .3rem;">${fam}</h3>
+               <div class="cards-grid">${mergeAndSortByName(group).map(renderCardHTML).join('')}</div>`;
+    });
+  }
+  container.innerHTML = html;
+}
+
+function renderDetail() {
+  const panel = document.getElementById('detailPanel');
+  const c = S.characters.find(x => x.id === selectedId && x.revealEpisode <= S.currentEpisode);
+  if (!c) {
+    panel.innerHTML = `
+      <div class="detail-empty">
+        <p>Select a character to see details.</p>
+        <p class="muted">Use the Family map to click a node, or pick a card on the left.</p>
+      </div>`;
+    syncSheetForViewport();
+    return;
+  }
+  const vv = visibleVersions(c);
+  const lead = vv[0] || {};
+  const rel = c.relations || { spouse: [], parents: [], children: [], siblings: [] };
+
+  panel.innerHTML = `
+    <span class="sheet-handle" aria-hidden="true"></span>
+    <button class="sheet-close" type="button" aria-label="Close details">×</button>
+    <div class="detail-hero">
+      <div class="detail-avatar${lead.image ? ' image-clickable' : ''}"${lead.image ? ` data-image="${esc(lead.image)}"` : ''}>
+        ${lead.image ? `<img src="${esc(lead.image)}" alt="${esc(c.name)}" loading="lazy">` : initials(c.name)}
+      </div>
+      <div>
+        <div class="detail-name">${esc(c.name)}</div>
+        <div class="detail-family">${esc(c.family)}</div>
+      </div>
+    </div>
+    <div class="info-grid">
+      <div class="info-box"><div class="label">Occupation</div><div class="value">${c.occupation ? esc(c.occupation) : '—'}</div></div>
+      <div class="info-box"><div class="label">First seen</div><div class="value">${episodeLabel(c.revealEpisode)}</div></div>
+    </div>
+    <div class="related"><h4>Spouse / partner</h4><div class="rel-chips">${rel.spouse && rel.spouse.length ? rel.spouse.map(n => `<span class="rel-chip">${esc(n)}</span>`).join('') : '<span class="rel-chip" style="opacity:.6;">None shown yet</span>'}</div></div>
+    <div class="related"><h4>Parents</h4><div class="rel-chips">${rel.parents && rel.parents.length ? rel.parents.map(n => `<span class="rel-chip">${esc(n)}</span>`).join('') : '<span class="rel-chip" style="opacity:.6;">None listed</span>'}</div></div>
+    <div class="related"><h4>Children</h4><div class="rel-chips">${rel.children && rel.children.length ? rel.children.map(n => `<span class="rel-chip">${esc(n)}</span>`).join('') : '<span class="rel-chip" style="opacity:.6;">None listed</span>'}</div></div>
+    <div class="related"><h4>Siblings</h4><div class="rel-chips">${rel.siblings && rel.siblings.length ? rel.siblings.map(n => `<span class="rel-chip">${esc(n)}</span>`).join('') : '<span class="rel-chip" style="opacity:.6;">None listed</span>'}</div></div>
+    <div class="versions">
+      <h4>Time versions</h4>
+      <div class="version-list">
+        ${vv.length ? vv.map(v => `
+          <div class="version-card">
+            <div class="vphoto${v.image ? ' image-clickable' : ''}"${v.image ? ` data-image="${esc(v.image)}"` : ''}>
+              ${v.image ? `<img src="${esc(v.image)}" alt="${esc(c.name)} ${esc(v.label)}" loading="lazy">` : initials(c.name)}
+            </div>
+            <div class="vmeta"><div class="time">${esc(v.label)}</div></div>
+          </div>`).join('') : '<p style="font-size:.85rem;color:var(--muted);">No specific time versions listed yet.</p>'}
+      </div>
+    </div>`;
+
+  const closeBtn = panel.querySelector('.sheet-close');
+  if (closeBtn) closeBtn.addEventListener('click', closeDetailSheet);
+}
+
+function layoutNodes() {
+  const chars = visibleChars();
+  const canvas = document.getElementById('mapCanvas');
+  const rect = canvas.getBoundingClientRect();
+  const W = rect.width || 800;
+  const isMobile = W < 600;
+
+  const parentsOf = {};
+  const childrenOf = {};
+  chars.forEach(c => { parentsOf[c.id] = []; childrenOf[c.id] = []; });
+
+  chars.forEach(c => {
+    (c.relations?.children || []).forEach(childName => {
+      const child = chars.find(x => x.name === childName);
+      if (!child) return;
+      if (!childrenOf[c.id].includes(child.id)) childrenOf[c.id].push(child.id);
+      if (!parentsOf[child.id].includes(c.id)) parentsOf[child.id].push(c.id);
+    });
+  });
+
+  const generation = {};
+  const roots = chars.filter(c => parentsOf[c.id].length === 0);
+  roots.forEach(c => { generation[c.id] = 0; });
+
+  const queue = [...roots.map(c => c.id)];
+  while (queue.length) {
+    const id = queue.shift();
+    const gen = generation[id];
+    (childrenOf[id] || []).forEach(childId => {
+      if (generation[childId] === undefined || generation[childId] < gen + 1) {
+        generation[childId] = gen + 1;
+        queue.push(childId);
+      }
+    });
+  }
+  chars.forEach(c => { if (generation[c.id] === undefined) generation[c.id] = 0; });
+
+  const maxGen = Math.max(0, ...Object.values(generation));
+  const byGen = {};
+  for (let g = 0; g <= maxGen; g++) byGen[g] = [];
+  chars.forEach(c => byGen[generation[c.id]].push(c));
+
+  const hGap = isMobile ? Math.max((W - 40) / Math.max(4, Math.max(...Object.values(byGen).map(r => r.length))), 60) : 100;
+  const vGap = isMobile ? 110 : 130;
+  const topPad = 55;
+  const positions = {};
+
+  for (let g = 0; g <= maxGen; g++) {
+    const row = byGen[g];
+    if (!row.length) continue;
+    const placed = new Set();
+    const sorted = [];
+    row.forEach(c => {
+      if (placed.has(c.id)) return;
+      sorted.push(c);
+      placed.add(c.id);
+      (c.relations?.spouse || []).forEach(spName => {
+        const sp = row.find(x => x.name === spName && !placed.has(x.id));
+        if (sp) { sorted.push(sp); placed.add(sp.id); }
+      });
+    });
+
+    const totalW = (sorted.length - 1) * hGap;
+    const startX = Math.max(30, (W - totalW) / 2);
+    const y = topPad + g * vGap;
+
+    sorted.forEach((c, i) => {
+      positions[c.id] = { x: startX + i * hGap, y };
+    });
+
+    sorted.forEach(c => {
+      (c.relations?.spouse || []).forEach(spName => {
+        const sp = sorted.find(x => x.name === spName);
+        if (!sp || !positions[sp.id] || !positions[c.id]) return;
+        const myPos = positions[c.id];
+        const spPos = positions[sp.id];
+        if (Math.abs(myPos.x - spPos.x) < hGap * 1.5) {
+          const midX = (myPos.x + spPos.x) / 2;
+          const nudge = isMobile ? 26 : 32;
+          myPos.x = midX - nudge;
+          spPos.x = midX + nudge;
+        }
+      });
+    });
+  }
+
+  return positions;
+}
+
+function drawArrowhead(ctx, x1, y1, x2, y2, color) {
+  const angle = Math.atan2(y2 - y1, x2 - x1);
+  ctx.save();
+  ctx.translate(x2, y2);
+  ctx.rotate(angle);
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.lineTo(-8, -4);
+  ctx.lineTo(-8, 4);
+  ctx.closePath();
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawMap() {
+  const canvas = document.getElementById('mapCanvas');
+  if (!canvas) return;
+
+  const rect = canvas.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  const W = rect.width;
+  const H = rect.height;
+
+  nodePositions = layoutNodes();
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle = '#111110';
+  ctx.fillRect(0,0,W,H);
+
+  ctx.save();
+  ctx.translate(mapTransform.x, mapTransform.y);
+  ctx.scale(mapTransform.scale, mapTransform.scale);
+
+  const chars = visibleChars();
+  const drawn = new Set();
+  const isMobile = W < 600;
+  const nodeR = isMobile ? 22 : 26;
+
+  chars.forEach(c => {
+    const from = nodePositions[c.id];
+    if (!from) return;
+    const rel = c.relations || { spouse: [], parents: [], children: [], siblings: [] };
+
+    (rel.spouse || []).forEach(name => {
+      const other = chars.find(x => x.name === name);
+      if (!other || !nodePositions[other.id]) return;
+      const key = [c.id, other.id].sort().join('-');
+      if (drawn.has(key)) return;
+      drawn.add(key);
+      const to = nodePositions[other.id];
+      const mx = (from.x + to.x) / 2;
+      const my = from.y - 22;
+      ctx.beginPath();
+      ctx.moveTo(from.x, from.y - 4);
+      ctx.quadraticCurveTo(mx, my, to.x, to.y - 4);
+      ctx.strokeStyle = '#c9a84c';
+      ctx.lineWidth = 2.2;
+      ctx.globalAlpha = .85;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(mx, my + 8, 3, 0, Math.PI * 2);
+      ctx.fillStyle = '#c9a84c';
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    });
+
+    (rel.children || []).forEach(name => {
+      const child = chars.find(x => x.name === name);
+      if (!child || !nodePositions[child.id]) return;
+      const to = nodePositions[child.id];
+      ctx.beginPath();
+      ctx.moveTo(from.x, from.y + nodeR);
+      ctx.lineTo(to.x, to.y - nodeR);
+      ctx.strokeStyle = '#5ba3af';
+      ctx.lineWidth = 1.8;
+      ctx.globalAlpha = .8;
+      ctx.stroke();
+      drawArrowhead(ctx, from.x, from.y + nodeR, to.x, to.y - nodeR, '#5ba3af');
+      ctx.globalAlpha = 1;
+    });
+
+    (rel.siblings || []).forEach(name => {
+      const sib = chars.find(x => x.name === name);
+      if (!sib || !nodePositions[sib.id]) return;
+      const key = [c.id, sib.id].sort().join('-s-');
+      if (drawn.has(key)) return;
+      drawn.add(key);
+      const to = nodePositions[sib.id];
+      const midY = (from.y + to.y) / 2;
+      ctx.beginPath();
+      ctx.moveTo(from.x, midY);
+      ctx.lineTo(to.x, midY);
+      ctx.strokeStyle = '#8b7cc8';
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([4,4]);
+      ctx.globalAlpha = .6;
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.globalAlpha = 1;
+    });
+  });
+
+  chars.forEach(c => {
+    const pos = nodePositions[c.id];
+    if (!pos) return;
+    const { x, y } = pos;
+    const color = familyColor(c.family);
+    const isSelected = c.id === selectedId;
+
+    if (isSelected) {
+      ctx.beginPath();
+      ctx.arc(x, y, nodeR + 10, 0, Math.PI * 2);
+      ctx.fillStyle = color + '33';
+      ctx.fill();
+    }
+
+    ctx.beginPath();
+    ctx.arc(x, y, nodeR, 0, Math.PI * 2);
+    ctx.fillStyle = '#191817';
+    ctx.fill();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = isSelected ? 3 : 2;
+    ctx.stroke();
+
+    ctx.fillStyle = color;
+    ctx.font = `bold ${isMobile ? 10 : 11}px system-ui`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(initials(c.name), x, y);
+
+    const firstName = c.name.split(' ')[0];
+    ctx.fillStyle = '#e8e3da';
+    ctx.font = `${isMobile ? 9 : 10}px system-ui`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    ctx.fillText(firstName, x, y + nodeR + 4);
+  });
+
+  ctx.restore();
+}
+
+function setupMapInteraction() {
+  const canvas = document.getElementById('mapCanvas');
+
+  const getPos = (e) => {
+    const r = canvas.getBoundingClientRect();
+    if (e.touches) {
+      return { x: e.touches[0].clientX - r.left, y: e.touches[0].clientY - r.top };
+    }
+    return { x: e.clientX - r.left, y: e.clientY - r.top };
+  };
+
+  const hitTest = (px, py) => {
+    const isMobile = canvas.getBoundingClientRect().width < 600;
+    const nodeR = isMobile ? 22 : 26;
+    const sx = (px - mapTransform.x) / mapTransform.scale;
+    const sy = (py - mapTransform.y) / mapTransform.scale;
+    const chars = visibleChars();
+    for (const c of chars) {
+      const pos = nodePositions[c.id];
+      if (!pos) continue;
+      const dist = Math.hypot(sx - pos.x, sy - pos.y);
+      if (dist < nodeR + 6) return c.id;
+    }
+    return null;
+  };
+
+  canvas.addEventListener('pointerdown', e => {
+    isDragging = false;
+    dragStart = getPos(e);
+    canvas.setPointerCapture(e.pointerId);
+  });
+
+  canvas.addEventListener('pointermove', e => {
+    if (!e.buttons && e.pointerType !== 'touch') return;
+    const p = getPos(e);
+    const dx = p.x - dragStart.x;
+    const dy = p.y - dragStart.y;
+    if (Math.hypot(dx, dy) > 4) isDragging = true;
+    if (isDragging) {
+      mapTransform.x += p.x - dragStart.x;
+      mapTransform.y += p.y - dragStart.y;
+      dragStart = p;
+      drawMap();
+    }
+  });
+
+  canvas.addEventListener('pointerup', e => {
+    if (!isDragging) {
+      const p = getPos(e);
+      const hit = hitTest(p.x, p.y);
+      if (hit) {
+        selectedId = hit;
+        if (activeTab === 'map') {
+          document.querySelector('[data-tab="characters"]').click();
+        }
+        renderCards();
+        renderDetail();
+        openDetailSheet();
+        drawMap();
+      }
+    }
+    isDragging = false;
+  });
+
+  canvas.addEventListener('wheel', e => {
+    e.preventDefault();
+    const delta = e.deltaY > 0 ? 0.9 : 1.1;
+    const p = getPos(e);
+    mapTransform.x = p.x + (mapTransform.x - p.x) * delta;
+    mapTransform.y = p.y + (mapTransform.y - p.y) * delta;
+    mapTransform.scale = Math.max(0.3, Math.min(3, mapTransform.scale * delta));
+    drawMap();
+  }, { passive: false });
+
+  document.getElementById('mapZoomIn').addEventListener('click', () => {
+    mapTransform.scale = Math.min(3, mapTransform.scale * 1.2); drawMap();
+  });
+  document.getElementById('mapZoomOut').addEventListener('click', () => {
+    mapTransform.scale = Math.max(0.3, mapTransform.scale / 1.2); drawMap();
+  });
+  document.getElementById('mapReset').addEventListener('click', () => {
+    mapTransform = { x: 0, y: 0, scale: 1 }; drawMap();
+  });
+}
+
+function populateCharSelect() {
+  const sel = document.getElementById('charSelect');
+  const cur = sel.value;
+  sel.innerHTML = '<option value="">— New character —</option>';
+  mergeAndSortByName(S.characters).forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c.id;
+    opt.textContent = c.name + (c.revealEpisode > S.currentEpisode ? ' (hidden)' : '');
+    sel.appendChild(opt);
+  });
+  if (cur) sel.value = cur;
+}
+
+function loadCharacterIntoEditor(id) {
+  const c = S.characters.find(x => x.id === id);
+  document.getElementById('fName').value = c ? c.name : '';
+  document.getElementById('fFamily').value = c ? c.family : 'Kahnwald';
+  document.getElementById('fOcc').value = c ? (c.occupation || '') : '';
+  document.getElementById('fReveal').value = c ? c.revealEpisode : 1;
+  document.getElementById('fSpouse').value = c ? (c.relations?.spouse || []).join(', ') : '';
+  document.getElementById('fParents').value = c ? (c.relations?.parents || []).join(', ') : '';
+  document.getElementById('fChildren').value = c ? (c.relations?.children || []).join(', ') : '';
+  document.getElementById('fSiblings').value = c ? (c.relations?.siblings || []).join(', ') : '';
+  document.getElementById('deleteCharBtn').classList.toggle('hidden', !c);
+  renderVersionEditor(c ? (c.versions || []) : []);
+}
+
+let editorVersions = [];
+function renderVersionEditor(versions) {
+  editorVersions = JSON.parse(JSON.stringify(versions));
+  const container = document.getElementById('versionListEdit');
+  container.innerHTML = '';
+  editorVersions.forEach((v, i) => {
+    const block = document.createElement('div');
+    block.className = 've-block';
+    block.innerHTML = `
+      <div class="ve-row">
+        <div class="field"><label>Era / Year label</label><input type="text" value="${esc(v.label)}" data-vi="${i}" data-vk="label"></div>
+        <div class="field"><label>Reveal episode #</label><input type="number" min="1" max="26" value="${v.revealEpisode}" data-vi="${i}" data-vk="revealEpisode"></div>
+      </div>
+      <div class="field"><label>Photo URL</label><input type="url" placeholder="https://..." value="${esc(v.image || '')}" data-vi="${i}" data-vk="image"></div>
+      <button class="btn sm danger" type="button" data-del="${i}">Remove</button>`;
+    container.appendChild(block);
+  });
+
+  container.querySelectorAll('input[data-vi]').forEach(inp => {
+    inp.addEventListener('input', e => {
+      const i = +e.target.dataset.vi;
+      const k = e.target.dataset.vk;
+      editorVersions[i][k] = k === 'revealEpisode' ? +e.target.value : e.target.value;
+    });
+  });
+  container.querySelectorAll('button[data-del]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      editorVersions.splice(+e.target.dataset.del, 1);
+      renderVersionEditor(editorVersions);
+    });
+  });
+}
+
+function bootApp() {
+  const epRange = document.getElementById('episodeRange');
+  epRange.value = S.currentEpisode;
+  const lbl = episodeLabel(S.currentEpisode);
+  document.getElementById('episodeLabelH').textContent = lbl;
+  document.getElementById('episodeLabelBig').textContent = lbl;
+
+  renderCards();
+  renderDetail();
+  populateCharSelect();
+  setupMapInteraction();
+  syncSheetForViewport();
+
+  epRange.addEventListener('input', e => {
+    S.currentEpisode = +e.target.value;
+    const l = episodeLabel(S.currentEpisode);
+    document.getElementById('episodeLabelH').textContent = l;
+    document.getElementById('episodeLabelBig').textContent = l;
+    saveToLocalStorage();
+    renderCards();
+    renderDetail();
+    populateCharSelect();
+    if (activeTab === 'map') drawMap();
+  });
+
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeTab = btn.dataset.tab;
+      document.getElementById('tab-characters').classList.toggle('hidden', activeTab !== 'characters');
+      document.getElementById('tab-map').classList.toggle('hidden', activeTab !== 'map');
+      if (activeTab !== 'characters') closeDetailSheet();
+      if (activeTab === 'map') { setTimeout(drawMap, 50); }
+    });
+  });
+
+  document.getElementById('searchInput').addEventListener('input', renderCards);
+  document.getElementById('familyFilter').addEventListener('change', renderCards);
+
+  document.getElementById('cardsGrid').addEventListener('click', e => {
+    const card = e.target.closest('.char-card');
+    if (card) {
+      const img = e.target.closest('.image-clickable');
+      if (img) { openImage(img.dataset.image); return; }
+      selectedId = card.dataset.id;
+      renderCards();
+      renderDetail();
+      openDetailSheet();
+      if (activeTab === 'map') drawMap();
+    }
+  });
+
+  document.getElementById('detailPanel').addEventListener('click', e => {
+    const img = e.target.closest('.image-clickable');
+    if (img) openImage(img.dataset.image);
+  });
+
+  document.getElementById('sheetBackdrop').addEventListener('click', closeDetailSheet);
+  window.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      closeDetailSheet();
+      document.getElementById('imageModal').classList.remove('open');
+    }
+  });
+
+  document.getElementById('viewToggle').addEventListener('click', () => {
+    characterViewMode = characterViewMode === 'alphabetical' ? 'family' : 'alphabetical';
+    document.getElementById('viewToggle').textContent = 'View: ' + (characterViewMode === 'alphabetical' ? 'Alphabetical' : 'By family');
+    renderCards();
+  });
+
+  document.getElementById('editToggleBtn').addEventListener('click', () => {
+    editMode = editMode === 'off' ? 'on' : 'off';
+    document.body.dataset.editMode = editMode;
+    document.getElementById('editToggleBtn').textContent = editMode === 'on' ? 'Done' : 'Edit';
+    if (editMode === 'on') populateCharSelect();
+  });
+
+  document.getElementById('saveCharBtn').addEventListener('click', () => {
+    const id = document.getElementById('charSelect').value;
+    const name = document.getElementById('fName').value.trim();
+    if (!name) { showToast('Please enter a name.'); return; }
+
+    const charData = {
+      id: id || name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') + '-' + Date.now(),
+      name,
+      family: document.getElementById('fFamily').value,
+      occupation: document.getElementById('fOcc').value.trim(),
+      revealEpisode: +document.getElementById('fReveal').value || 1,
+      relations: {
+        spouse: splitCSV(document.getElementById('fSpouse').value),
+        parents: splitCSV(document.getElementById('fParents').value),
+        children: splitCSV(document.getElementById('fChildren').value),
+        siblings: splitCSV(document.getElementById('fSiblings').value),
+      },
+      versions: JSON.parse(JSON.stringify(editorVersions))
+    };
+
+    const idx = S.characters.findIndex(x => x.id === charData.id);
+    if (idx >= 0) S.characters[idx] = charData;
+    else S.characters.push(charData);
+
+    saveToLocalStorage();
+    showToast('✓ ' + name + ' saved');
+    populateCharSelect();
+    document.getElementById('charSelect').value = charData.id;
+    renderCards();
+    renderDetail();
+    if (activeTab === 'map') drawMap();
+  });
+
+  document.getElementById('deleteCharBtn').addEventListener('click', () => {
+    const id = document.getElementById('charSelect').value;
+    if (!id) return;
+    const c = S.characters.find(x => x.id === id);
+    if (!c) return;
+    if (!confirm('Delete ' + c.name + '?')) return;
+    S.characters = S.characters.filter(x => x.id !== id);
+    saveToLocalStorage();
+    showToast('Deleted ' + c.name);
+    if (selectedId === id) {
+      selectedId = null;
+      closeDetailSheet();
+    }
+    populateCharSelect();
+    loadCharacterIntoEditor('');
+    renderCards();
+    renderDetail();
+    if (activeTab === 'map') drawMap();
+  });
+
+  document.getElementById('charSelect').addEventListener('change', e => {
+    loadCharacterIntoEditor(e.target.value);
+  });
+
+  document.getElementById('addVersionBtn').addEventListener('click', () => {
+    editorVersions.push({ label: '', image: '', revealEpisode: S.currentEpisode });
+    renderVersionEditor(editorVersions);
+  });
+
+  document.getElementById('exportBtn').addEventListener('click', () => {
+    const blob = new Blob([JSON.stringify(S, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'data.json';
+    a.click();
+    showToast('data.json exported');
+  });
+
+  document.getElementById('importBtn').addEventListener('click', () => {
+    document.getElementById('importFile').click();
+  });
+  document.getElementById('importFile').addEventListener('change', e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      try {
+        const data = JSON.parse(ev.target.result);
+        if (!data.characters) throw new Error('Invalid format');
+        S = data;
+        saveToLocalStorage();
+        epRange.value = S.currentEpisode;
+        const l = episodeLabel(S.currentEpisode);
+        document.getElementById('episodeLabelH').textContent = l;
+        document.getElementById('episodeLabelBig').textContent = l;
+        renderCards();
+        renderDetail();
+        populateCharSelect();
+        if (activeTab === 'map') drawMap();
+        showToast('✓ JSON imported — ' + S.characters.length + ' characters loaded');
+      } catch(err) {
+        showToast('Import failed: invalid JSON');
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = '';
+  });
+
+  function openImage(url) {
+    if (!url) return;
+    document.getElementById('imageModalImg').src = url;
+    document.getElementById('imageModal').classList.add('open');
+  }
+  document.getElementById('imageModal').addEventListener('click', () => {
+    document.getElementById('imageModal').classList.remove('open');
+  });
+
+  let isDark = true;
+  document.getElementById('themeBtn').addEventListener('click', () => {
+    isDark = !isDark;
+    document.documentElement.style.setProperty('--bg', isDark ? '#111110' : '#f5f4f0');
+    document.documentElement.style.setProperty('--surface', isDark ? '#191817' : '#ffffff');
+    document.documentElement.style.setProperty('--text', isDark ? '#e8e3da' : '#1a1916');
+    document.documentElement.style.setProperty('--muted', isDark ? '#a09890' : '#6a6460');
+    document.body.style.background = isDark
+      ? 'radial-gradient(circle at top, #1b1a18 0, #111110 45%, #080807 100%)'
+      : 'radial-gradient(circle at top, #f0ede8 0, #f5f4f0 60%)';
+    document.getElementById('themeBtn').textContent = 'Theme';
+    if (activeTab === 'map') drawMap();
+  });
+
+  window.addEventListener('resize', () => {
+    syncSheetForViewport();
+    if (activeTab === 'map') drawMap();
+  });
+}
+
+initData();
+</script>
+</body>
+</html>
