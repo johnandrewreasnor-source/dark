@@ -1,0 +1,771 @@
+{
+  "currentEpisode": 10,
+  "characters": [
+    {
+      "id": "jonas",
+      "name": "Jonas Kahnwald",
+      "family": "Kahnwald",
+      "occupation": "Student",
+      "revealEpisode": 1,
+      "relations": {
+        "spouse": [],
+        "parents": [
+          "Hannah Kahnwald",
+          "Michael Kahnwald"
+        ],
+        "children": [],
+        "siblings": []
+      },
+      "versions": [
+        {
+          "label": "2019",
+          "image": "https://i.insider.com/5a3bd4ddec1ade66fc6cda47?width=700",
+          "revealEpisode": 1
+        }
+      ]
+    },
+    {
+      "id": "hannah",
+      "name": "Hannah Kahnwald",
+      "family": "Kahnwald",
+      "occupation": "",
+      "revealEpisode": 1,
+      "relations": {
+        "spouse": [
+          "Michael Kahnwald"
+        ],
+        "parents": [],
+        "children": [
+          "Jonas Kahnwald"
+        ],
+        "siblings": []
+      },
+      "versions": [
+        {
+          "label": "2019",
+          "image": "https://m.media-amazon.com/images/M/MV5BMjMzNjUxMDk0MF5BMl5BanBnXkFtZTgwMjY1OTgyNDM@._V1_.jpg",
+          "revealEpisode": 1
+        },
+        {
+          "label": "1986",
+          "image": "https://m.media-amazon.com/images/M/MV5BMTc2ZmY3NTEtOTg0Yi00NDU0LTk2MWItNTFhMmFmODU0MDNkXkEyXkFqcGc@._V1_.jpg",
+          "revealEpisode": 2
+        }
+      ]
+    },
+    {
+      "id": "michael",
+      "name": "Michael Kahnwald",
+      "family": "Kahnwald",
+      "occupation": "Artist",
+      "revealEpisode": 1,
+      "relations": {
+        "spouse": [
+          "Hannah Kahnwald"
+        ],
+        "parents": [],
+        "children": [
+          "Jonas Kahnwald"
+        ],
+        "siblings": []
+      },
+      "versions": [
+        {
+          "label": "2019",
+          "image": "https://static0.srcdn.com/wordpress/wp-content/uploads/2021/06/Michael-2019.jpg?q=50&fit=crop&w=825&dpr=1.5",
+          "revealEpisode": 1
+        }
+      ]
+    },
+    {
+      "id": "ulrich",
+      "name": "Ulrich Nielsen",
+      "family": "Nielsen",
+      "occupation": "Police officer",
+      "revealEpisode": 1,
+      "relations": {
+        "spouse": [
+          "Katharina Nielsen"
+        ],
+        "parents": [],
+        "children": [
+          "Magnus Nielsen",
+          "Martha Nielsen",
+          "Mikkel Nielsen"
+        ],
+        "siblings": [
+          "Mads Nielsen"
+        ]
+      },
+      "versions": [
+        {
+          "label": "2019",
+          "image": "https://static0.cbrimages.com/wordpress/wp-content/uploads/2024/09/dark-ulrich-nielson.jpg?w=1600&h=900&fit=crop",
+          "revealEpisode": 1
+        },
+        {
+          "label": "1986",
+          "image": "https://i.pinimg.com/originals/bb/c0/2f/bbc02fc6f9ab197e4bdab185364692d4.jpg",
+          "revealEpisode": 3
+        }
+      ]
+    },
+    {
+      "id": "katharina",
+      "name": "Katharina Nielsen",
+      "family": "Nielsen",
+      "occupation": "School principal",
+      "revealEpisode": 1,
+      "relations": {
+        "spouse": [
+          "Ulrich Nielsen"
+        ],
+        "parents": [],
+        "children": [
+          "Magnus Nielsen",
+          "Martha Nielsen",
+          "Mikkel Nielsen"
+        ],
+        "siblings": []
+      },
+      "versions": [
+        {
+          "label": "2019",
+          "image": "https://i.pinimg.com/736x/13/1f/d0/131fd0825b5c028c73b60e2981b98338.jpg",
+          "revealEpisode": 1
+        },
+        {
+          "label": "1986",
+          "image": "https://m.media-amazon.com/images/M/MV5BODY4MzczYTctYmU3MS00YTc4LThjNDAtMjdkMzNkZmVjNzI4XkEyXkFqcGc@._V1_.jpg",
+          "revealEpisode": 3
+        }
+      ]
+    },
+    {
+      "id": "magnus",
+      "name": "Magnus Nielsen",
+      "family": "Nielsen",
+      "occupation": "Student",
+      "revealEpisode": 1,
+      "relations": {
+        "spouse": [],
+        "parents": [
+          "Ulrich Nielsen",
+          "Katharina Nielsen"
+        ],
+        "children": [],
+        "siblings": [
+          "Martha Nielsen",
+          "Mikkel Nielsen"
+        ]
+      },
+      "versions": [
+        {
+          "label": "2019",
+          "image": "https://pbs.twimg.com/media/EdhQcO5U4AA-nyb.jpg",
+          "revealEpisode": 1
+        }
+      ]
+    },
+    {
+      "id": "martha",
+      "name": "Martha Nielsen",
+      "family": "Nielsen",
+      "occupation": "Student",
+      "revealEpisode": 1,
+      "relations": {
+        "spouse": [],
+        "parents": [
+          "Ulrich Nielsen",
+          "Katharina Nielsen"
+        ],
+        "children": [],
+        "siblings": [
+          "Magnus Nielsen",
+          "Mikkel Nielsen"
+        ]
+      },
+      "versions": [
+        {
+          "label": "2019",
+          "image": "https://i.pinimg.com/736x/eb/7b/bd/eb7bbd6d64f309185e53ae51570b6f5c.jpg",
+          "revealEpisode": 1
+        }
+      ]
+    },
+    {
+      "id": "mikkel",
+      "name": "Mikkel Nielsen",
+      "family": "Nielsen",
+      "occupation": "Student",
+      "revealEpisode": 1,
+      "relations": {
+        "spouse": [],
+        "parents": [
+          "Ulrich Nielsen",
+          "Katharina Nielsen"
+        ],
+        "children": [],
+        "siblings": [
+          "Magnus Nielsen",
+          "Martha Nielsen"
+        ]
+      },
+      "versions": [
+        {
+          "label": "2019",
+          "image": "https://m.media-amazon.com/images/M/MV5BODBmOGJkYWYtNTg1OS00MTc1LWE1NjMtNjQ1YmU4MGQwNGIzXkEyXkFqcGc@._V1_.jpg",
+          "revealEpisode": 1
+        }
+      ]
+    },
+    {
+      "id": "charlotte",
+      "name": "Charlotte Doppler",
+      "family": "Doppler",
+      "occupation": "Police chief",
+      "revealEpisode": 1,
+      "relations": {
+        "spouse": [
+          "Peter Doppler"
+        ],
+        "parents": [],
+        "children": [
+          "Franziska Doppler",
+          "Elisabeth Doppler"
+        ],
+        "siblings": []
+      },
+      "versions": [
+        {
+          "label": "1986",
+          "image": "https://static.tvmaze.com/uploads/images/original_untouched/268/671458.jpg",
+          "revealEpisode": 5
+        },
+        {
+          "label": "2019",
+          "image": "https://static.wikia.nocookie.net/dark-netflix/images/1/11/Closeup_-_Charlotte.jpg/revision/latest?cb=20171227115258",
+          "revealEpisode": 1
+        }
+      ]
+    },
+    {
+      "id": "peter",
+      "name": "Peter Doppler",
+      "family": "Doppler",
+      "occupation": "Therapist",
+      "revealEpisode": 1,
+      "relations": {
+        "spouse": [
+          "Charlotte Doppler"
+        ],
+        "parents": [
+          "Helge Doppler"
+        ],
+        "children": [
+          "Franziska Doppler",
+          "Elisabeth Doppler"
+        ],
+        "siblings": []
+      },
+      "versions": [
+        {
+          "label": "2019",
+          "image": "https://i.redd.it/nx8e30v41o451.png",
+          "revealEpisode": 1
+        }
+      ]
+    },
+    {
+      "id": "franziska",
+      "name": "Franziska Doppler",
+      "family": "Doppler",
+      "occupation": "Student",
+      "revealEpisode": 1,
+      "relations": {
+        "spouse": [],
+        "parents": [
+          "Charlotte Doppler",
+          "Peter Doppler"
+        ],
+        "children": [],
+        "siblings": [
+          "Elisabeth Doppler"
+        ]
+      },
+      "versions": [
+        {
+          "label": "2019",
+          "image": "https://www.williamjacket.com/wp-content/uploads/2024/11/Gina-Stiebitz-TV-Series-Dark-Franziska-Doppler-Shearling-Grey-Leather-Jacket.webp",
+          "revealEpisode": 1
+        }
+      ]
+    },
+    {
+      "id": "elisabeth",
+      "name": "Elisabeth Doppler",
+      "family": "Doppler",
+      "occupation": "Student",
+      "revealEpisode": 1,
+      "relations": {
+        "spouse": [],
+        "parents": [
+          "Charlotte Doppler",
+          "Peter Doppler"
+        ],
+        "children": [],
+        "siblings": [
+          "Franziska Doppler"
+        ]
+      },
+      "versions": [
+        {
+          "label": "2019",
+          "image": "https://i.redd.it/sht51ea8px751.jpg",
+          "revealEpisode": 1
+        }
+      ]
+    },
+    {
+      "id": "regina",
+      "name": "Regina Tiedemann",
+      "family": "Tiedemann",
+      "occupation": "Hotel owner",
+      "revealEpisode": 1,
+      "relations": {
+        "spouse": [],
+        "parents": [
+          "Claudia Tiedemann"
+        ],
+        "children": [
+          "Bartosz Tiedemann"
+        ],
+        "siblings": []
+      },
+      "versions": [
+        {
+          "label": "2019",
+          "image": "https://artworks.thetvdb.com/banners/person/450158/6027f06dd5561.jpg",
+          "revealEpisode": 1
+        },
+        {
+          "label": "1986",
+          "image": "https://i.pinimg.com/736x/61/35/3d/61353db649ec1ba157c4cf5c472a12cf.jpg",
+          "revealEpisode": 3
+        }
+      ]
+    },
+    {
+      "id": "bartosz",
+      "name": "Bartosz Tiedemann",
+      "family": "Tiedemann",
+      "occupation": "Student",
+      "revealEpisode": 1,
+      "relations": {
+        "spouse": [],
+        "parents": [
+          "Regina Tiedemann"
+        ],
+        "children": [],
+        "siblings": []
+      },
+      "versions": [
+        {
+          "label": "2019",
+          "image": "https://artworks.thetvdb.com/banners/person/641620/5f00941485b8f.jpg",
+          "revealEpisode": 1
+        }
+      ]
+    },
+    {
+      "id": "claudia",
+      "name": "Claudia Tiedemann",
+      "family": "Tiedemann",
+      "occupation": "Nuclear plant director",
+      "revealEpisode": 3,
+      "relations": {
+        "spouse": [],
+        "parents": [
+          "Egon Tiedemann",
+          "Doris Tiedermann"
+        ],
+        "children": [
+          "Regina Tiedemann"
+        ],
+        "siblings": []
+      },
+      "versions": [
+        {
+          "label": "1986",
+          "image": "https://a1cf74336522e87f135f-2f21ace9a6cf0052456644b80fa06d4f.ssl.cf2.rackcdn.com/images/characters/large/800/Claudia-Tiedemann.Dark.webp",
+          "revealEpisode": 3
+        },
+        {
+          "label": "1953",
+          "image": "https://m.media-amazon.com/images/M/MV5BMDExZDBiZWUtMDFlNy00ZDAwLTlmMDAtZTdjMzg5ZDdkZGYzXkEyXkFqcGc@._V1_QL75_UX438_.jpg",
+          "revealEpisode": 9
+        },
+        {
+          "label": "2019",
+          "image": "https://miro.medium.com/v2/resize:fit:1204/1*DQRO3oSAKNqRi7N9RgeeNA.jpeg",
+          "revealEpisode": 8
+        }
+      ]
+    },
+    {
+      "id": "egon",
+      "name": "Egon Tiedemann",
+      "family": "Tiedemann",
+      "occupation": "Police officer",
+      "revealEpisode": 3,
+      "relations": {
+        "spouse": [],
+        "parents": [],
+        "children": [
+          "Claudia Tiedemann"
+        ],
+        "siblings": []
+      },
+      "versions": [
+        {
+          "label": "1986",
+          "image": "https://artworks.thetvdb.com/banners/person/633835/5f00958266bc6.jpg",
+          "revealEpisode": 3
+        },
+        {
+          "label": "1953",
+          "image": "https://m.media-amazon.com/images/M/MV5BMDQ1ODllNTEtZDA5NS00ZGE5LTlkOWEtYWQ2MTFmOGRhZDhlXkEyXkFqcGc@._V1_.jpg",
+          "revealEpisode": 8
+        }
+      ]
+    },
+    {
+      "id": "noah",
+      "name": "Noah",
+      "family": "Other",
+      "occupation": "Priest",
+      "revealEpisode": 1,
+      "relations": {
+        "spouse": [],
+        "parents": [],
+        "children": [],
+        "siblings": []
+      },
+      "versions": [
+        {
+          "label": "2019",
+          "image": "https://i.redd.it/v9l9127wkh051.jpg",
+          "revealEpisode": 1
+        }
+      ]
+    },
+    {
+      "id": "stranger",
+      "name": "The_Stranger",
+      "family": "Other",
+      "occupation": "",
+      "revealEpisode": 2,
+      "relations": {
+        "spouse": [],
+        "parents": [],
+        "children": [],
+        "siblings": []
+      },
+      "versions": [
+        {
+          "label": "2019",
+          "image": "https://www.ujackets.com/wp-content/uploads/2020/06/Dark-The-Stranger-Puffer-Jacket.jpg",
+          "revealEpisode": 2
+        }
+      ]
+    },
+    {
+      "id": "helge-doppler-1781041957255",
+      "name": "Helge Doppler",
+      "family": "Doppler",
+      "occupation": "Dementia patient",
+      "revealEpisode": 1,
+      "relations": {
+        "spouse": [],
+        "parents": [
+          "Bernd Doppler",
+          "Greta Doppler"
+        ],
+        "children": [],
+        "siblings": []
+      },
+      "versions": [
+        {
+          "label": "2019",
+          "image": "https://d2xyxq01uvku0q.cloudfront.net/4a406354-63a3-4138-ae1b-d2856206bc06.jpg",
+          "revealEpisode": 2
+        },
+        {
+          "label": "1953",
+          "image": "https://m.media-amazon.com/images/M/MV5BMDVjZTkwYWMtMTFhOC00NzY5LWE2NjItOWJkZGRhY2EyOTc3XkEyXkFqcGc@._V1_QL75_UX439_.jpg",
+          "revealEpisode": 8
+        },
+        {
+          "label": "1986",
+          "image": "https://artworks.thetvdb.com/banners/person/262991/5edebd08a7fbd.jpg",
+          "revealEpisode": 1
+        }
+      ]
+    },
+    {
+      "id": "doris-tiedermann-1781042706227",
+      "name": "Doris Tiedermann",
+      "family": "Tiedemann",
+      "occupation": "Homemaker",
+      "revealEpisode": 8,
+      "relations": {
+        "spouse": [
+          "Egon Tiedemann"
+        ],
+        "parents": [],
+        "children": [
+          "Claudia Tiedemann"
+        ],
+        "siblings": []
+      },
+      "versions": [
+        {
+          "label": "1953",
+          "image": "https://m.media-amazon.com/images/M/MV5BOWVmNzRjNzItNDdiZi00NGNjLWFiNTUtYzMxNGJiNWUxZDVhXkEyXkFqcGc@._V1_.jpg",
+          "revealEpisode": 8
+        }
+      ]
+    },
+    {
+      "id": "agnes-nielsen-1781042903487",
+      "name": "Agnes Nielsen",
+      "family": "Nielsen",
+      "occupation": "",
+      "revealEpisode": 8,
+      "relations": {
+        "spouse": [],
+        "parents": [],
+        "children": [
+          "Tronte Nielsen"
+        ],
+        "siblings": []
+      },
+      "versions": [
+        {
+          "label": "1953",
+          "image": "https://m.media-amazon.com/images/M/MV5BMmEzOTk5Y2YtM2IzMS00MGQ5LThiNGQtNzE2ZjBlM2JmMGU0XkEyXkFqcGc@._V1_.jpg",
+          "revealEpisode": 9
+        }
+      ]
+    },
+    {
+      "id": "trone-nielsen-1781043019267",
+      "name": "Tronte Nielsen",
+      "family": "Nielsen",
+      "occupation": "Journalist",
+      "revealEpisode": 1,
+      "relations": {
+        "spouse": [
+          "Jana Nielson"
+        ],
+        "parents": [
+          "Agnes Nielson"
+        ],
+        "children": [
+          "Ulrich Nielsen",
+          "Mads Nielsen"
+        ],
+        "siblings": []
+      },
+      "versions": [
+        {
+          "label": "2019",
+          "image": "https://m.media-amazon.com/images/M/MV5BNGQyMzQzODEtMzFlOS00MjUxLWJkZWQtNzAwNDAxZjlkMjVjXkEyXkFqcGc@._V1_.jpg",
+          "revealEpisode": 10
+        },
+        {
+          "label": "1986",
+          "image": "https://media.tenor.com/sPXF_Jx88IAAAAAe/clench-jaw-felix-kramer.png",
+          "revealEpisode": 7
+        },
+        {
+          "label": "1953",
+          "image": "https://artworks.thetvdb.com/banners/person/8172051/5f01cc36c2a88.jpg",
+          "revealEpisode": 9
+        }
+      ]
+    },
+    {
+      "id": "jana-nielsen-1781045873924",
+      "name": "Jana Nielsen",
+      "family": "Nielsen",
+      "occupation": "",
+      "revealEpisode": 1,
+      "relations": {
+        "spouse": [
+          "Tronte Nielsen"
+        ],
+        "parents": [],
+        "children": [
+          "Ulrich Nielsen",
+          "Mads Nielsen"
+        ],
+        "siblings": []
+      },
+      "versions": [
+        {
+          "label": "2019",
+          "image": "https://static.tvmaze.com/uploads/images/medium_portrait/137/344870.jpg",
+          "revealEpisode": 1
+        },
+        {
+          "label": "1986",
+          "image": "https://artworks.thetvdb.com/banners/person/7892551/5f1609e99f22b.jpg",
+          "revealEpisode": 3
+        },
+        {
+          "label": "1953",
+          "image": "https://m.media-amazon.com/images/M/MV5BZWI1ZTVjMGEtNjUyOC00YmYzLWI4NzYtMmQ3MDJjYjJiYTZhXkEyXkFqcGc@._V1_QL75_UX439_.jpg",
+          "revealEpisode": 9
+        }
+      ]
+    },
+    {
+      "id": "ines-kahnwald-1781046178803",
+      "name": "Ines Kahnwald",
+      "family": "Kahnwald",
+      "occupation": "Nurse",
+      "revealEpisode": 1,
+      "relations": {
+        "spouse": [],
+        "parents": [],
+        "children": [
+          "Michael Kahnwald"
+        ],
+        "siblings": []
+      },
+      "versions": [
+        {
+          "label": "2019",
+          "image": "https://moviefanblogger.com/wp-content/uploads/2020/06/Ines_2-300x300.png",
+          "revealEpisode": 1
+        },
+        {
+          "label": "1986",
+          "image": "https://imgix.bustle.com/inverse/ff/14/7f/e1/0314/436c/8704/e68c246bbe3c/ines-kahnwald-as-seen-in-1986.jpeg?w=374&h=210&fit=crop&crop=faces&dpr=2",
+          "revealEpisode": 4
+        },
+        {
+          "label": "1953",
+          "image": "https://static.tvmaze.com/uploads/images/medium_untouched/267/669243.jpg",
+          "revealEpisode": 9
+        }
+      ]
+    },
+    {
+      "id": "aleksander-tiedemann-1781046401539",
+      "name": "Aleksander Tiedemann",
+      "family": "Tiedemann",
+      "occupation": "Power Plant Manager",
+      "revealEpisode": 1,
+      "relations": {
+        "spouse": [],
+        "parents": [],
+        "children": [
+          "Bartosz Tiedemann"
+        ],
+        "siblings": []
+      },
+      "versions": [
+        {
+          "label": "2019",
+          "image": "https://metawitches.com/wp-content/uploads/2019/06/dark-aleksander-tiedemann-2019.png",
+          "revealEpisode": 1
+        },
+        {
+          "label": "1986",
+          "image": "https://metawitches.com/wp-content/uploads/2019/06/dark-aleksander-tiedemann-1986-.png",
+          "revealEpisode": 9
+        }
+      ]
+    },
+    {
+      "id": "bernd-doppler-1781046797764",
+      "name": "Bernd Doppler",
+      "family": "Doppler",
+      "occupation": "Power Plant Manager",
+      "revealEpisode": 2,
+      "relations": {
+        "spouse": [
+          "Greta Doppler"
+        ],
+        "parents": [],
+        "children": [
+          "Helge Doppler"
+        ],
+        "siblings": []
+      },
+      "versions": [
+        {
+          "label": "1986",
+          "image": "https://metawitches.com/wp-content/uploads/2019/02/dark-bernd-doppler-1986.png",
+          "revealEpisode": 2
+        },
+        {
+          "label": "1953",
+          "image": "https://static.tvmaze.com/uploads/images/medium_portrait/267/669250.jpg",
+          "revealEpisode": 10
+        }
+      ]
+    },
+    {
+      "id": "greta-doppler-1781046898980",
+      "name": "Greta Doppler",
+      "family": "Doppler",
+      "occupation": "",
+      "revealEpisode": 9,
+      "relations": {
+        "spouse": [
+          "Bernd Doppler"
+        ],
+        "parents": [],
+        "children": [
+          "Helge Doppler"
+        ],
+        "siblings": []
+      },
+      "versions": [
+        {
+          "label": "1953",
+          "image": "https://static.tvtropes.org/pmwiki/pub/images/gretta_doppler_768x448.jpg",
+          "revealEpisode": 9
+        }
+      ]
+    },
+    {
+      "id": "hg-tannhaus-1781047058727",
+      "name": "HG Tannhaus",
+      "family": "Other",
+      "occupation": "Clockmaker",
+      "revealEpisode": 5,
+      "relations": {
+        "spouse": [],
+        "parents": [],
+        "children": [],
+        "siblings": []
+      },
+      "versions": [
+        {
+          "label": "1986",
+          "image": "https://imgix.bustle.com/uploads/image/2017/12/12/d749ec34-635d-4a44-ac48-e8cf03ee1487-hg-tannhaus-dark-netflix.png",
+          "revealEpisode": 5
+        },
+        {
+          "label": "1953",
+          "image": "https://static.tvmaze.com/uploads/images/medium_portrait/268/671384.jpg",
+          "revealEpisode": 9
+        }
+      ]
+    }
+  ]
+}
